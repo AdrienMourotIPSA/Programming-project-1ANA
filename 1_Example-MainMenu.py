@@ -1,5 +1,5 @@
 ##Created by Adrien Mourot##
-#########23/05/2024#########
+#########24/05/2024#########
 
 import pygame
 import pygame_menu
@@ -11,39 +11,66 @@ screen = pygame.display.set_mode((1280, 720))
 pygame.display.set_caption('IPSA GAME PLATFORM')
 
 def signup_button():
-    c = courriel.get_value()
-    m = mdp.get_value()
+    c1 = courriel1.get_value()
+    m1 = mdp1.get_value()
     file = open('File_username.csv', 'r')
     lines = file.readlines()
     flag=0
     for line in lines:
         line = line.strip()
         l = line.split(',')
-        if l[0] == c and l[1] == m:
+        if l[0] == c1:
             colour1 = (200, 0, 0)
             fontObj = pygame.font.Font('freesansbold.ttf', 15)  
             text = fontObj.render("Already signed up email!", True, colour1)
-            screen.blit(text, (550,380))
+            screen.blit(text, (550,320))
             pygame.display.update()
-            pygame.time.delay(2000)
+            pygame.time.delay(1000)
             flag=1
     if flag==0:
-        if len(m)>6:
+        if len(m1)>6:
             file=open("File_username.csv", "a")
-            file.write(f"\n{c},{m}")
+            file.write(f"\n{c1},{m1}")
             colour1 = (200, 0, 0)
             fontObj = pygame.font.Font('freesansbold.ttf', 15)  
             text = fontObj.render("New user is registered!", True, colour1)
-            screen.blit(text, (560,380))
+            screen.blit(text, (560,320))
             pygame.display.update()
-            pygame.time.delay(2000)
-        elif len(m)<6:
+            pygame.time.delay(1000)
+            file.close()
+        elif len(m1)<6:
             colour1 = (200, 0, 0)
             fontObj = pygame.font.Font('freesansbold.ttf', 15)  
             text = fontObj.render("The password is too short (min 6 characters)", True, colour1)
-            screen.blit(text, (475,380))
+            screen.blit(text, (475,320))
             pygame.display.update()
-            pygame.time.delay(2000)
+            pygame.time.delay(1000)
+            
+
+def login_button():
+    c2 = courriel2.get_value()
+    m2 = mdp2.get_value()
+    file = open('File_username.csv', 'r')
+    lines = file.readlines()
+    flag=0
+    for line in lines:
+        line = line.strip()
+        l = line.split(',')
+        flag=0
+        if l[0] == c2 and l[1] == m2:
+            import Afterloginsettings
+            flag=1
+            return flag
+            
+    if flag==0 and (l[0] != c2 or l[1] != m2):
+        colour1 = (200, 0, 0)
+        fontObj = pygame.font.Font('freesansbold.ttf', 15)  
+        text = fontObj.render("Username or password is not correct!", True, colour1)
+        screen.blit(text, (500,320))
+        pygame.display.update()
+        pygame.time.delay(1000)
+        flag=1  
+
 
 
 difficulty = 1
@@ -58,18 +85,22 @@ def start_the_game():
 
 
 def login_function():
-    print(courriel.get_value())
+    print(courriel1.get_value())
          
 level = pygame_menu.Menu('Select a Difficulty', 400, 400, theme=themes.THEME_SOLARIZED)
 level.add.selector('levels :', [('level1', 1), ('level2', 2)], onchange=set_difficulty)
 
 mainmenu = pygame_menu.Menu('Welcome to main menu!', 1280, 720, theme=themes.THEME_SOLARIZED)
-courriel = mainmenu.add.text_input('Email: ', default='Email', maxchar=20)
-mdp = mainmenu.add.text_input('Password: ', default='Password', maxchar=20)
+courriel1 = mainmenu.add.text_input('Email: ', default='Email', maxchar=20)
+mdp1 = mainmenu.add.text_input('Password: ', default='Password', maxchar=20)
 mainmenu.add.button('Sign up', signup_button)
 mainmenu.add.text_input('',maxchar=0)
-mainmenu.add.text_input('Email: ', default='Email', maxchar=20)
-mainmenu.add.text_input('Password: ',default='Password', maxchar=20)
-mainmenu.add.button('Log in', login_function)
- 
+courriel2 = mainmenu.add.text_input('Email: ', default='Email', maxchar=20)
+mdp2 = mainmenu.add.text_input('Password: ',default='Password', maxchar=20)
+mainmenu.add.button('Log in', login_button)
+mainmenu.add.text_input('',maxchar=0)
+mainmenu.add.button('Quit', pygame_menu.events.EXIT)
+
 mainmenu.mainloop(screen)
+
+pygame.display.get_caption() 
