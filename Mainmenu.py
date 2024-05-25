@@ -58,7 +58,9 @@ def login_button(): #this function check in the data base if the email associate
         l = line.split(',')
         flag=0
         if l[0] == c2 and l[1] == m2: #if yes, it imports another python file which is another window to open (work in progress...)
+            pygame_menu.events.EXIT #type: ignore
             import Afterloginsettings
+            file.close()         
             flag=1
             return flag
             
@@ -78,7 +80,7 @@ def set_difficulty(set_difficulty: Tuple, value: Any) -> None:
     global difficulty
     difficulty = str(value)
     print(difficulty)
-    
+
  
 def start_the_game():
     print(difficulty)
