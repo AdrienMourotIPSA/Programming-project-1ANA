@@ -11,10 +11,10 @@ screen = pygame.display.set_mode((1280, 720))
 pygame.display.set_caption('IPSA GAME PLATFORM')
 
 def profile_button():
-    print("test profile ok")
+    import ProfileMenu
 
 def htp_button():
-    print("test htp ok")
+    import htpmenu
 
 def game_button():
     print("test game ok")
@@ -28,10 +28,6 @@ def mg_button():
 def settings_button():
     print("test settings ok")
 
-def return_button():
-    pygame_menu.events.EXIT #type: ignore
-    import Mainmenu
-
 
 
 mainmenu = pygame_menu.Menu('Menu: ', 1280, 720, theme=themes.THEME_SOLARIZED) #theses few lines set up the different things to show on the main menu
@@ -42,6 +38,6 @@ mainmenu.add.button('Score Board', sb_button)
 mainmenu.add.button('More Games', mg_button)
 mainmenu.add.button('Settings', settings_button)
 mainmenu.add.text_input('',maxchar=0)
-mainmenu.add.button('Return', return_button) #type: ignore
+mainmenu.add.button('Quit', pygame_menu.events.EXIT) #type: ignore
 
 mainmenu.mainloop(screen)

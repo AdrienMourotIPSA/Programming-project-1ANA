@@ -11,7 +11,7 @@ color = (228, 230, 246)
 frame.fill(color)
 
 # load an image  
-image = pygame.image.load("D:/Google Drive/IPSA/2023-2024/Semester2 - GrandProject/Student_File-EN/example-image.jpg").convert()
+image = pygame.image.load("D:/Aero 1/2nd semester/AnGp121 - Programming project/Student_File-2024/img_allchar.png").convert()
 
 # add text font, color, size
 BLUE = (0, 0, 128)

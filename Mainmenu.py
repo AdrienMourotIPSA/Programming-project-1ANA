@@ -10,6 +10,7 @@ pygame.init() #here, we define the bases characteristics of the window to launch
 screen = pygame.display.set_mode((1280, 720))
 pygame.display.set_caption('IPSA GAME PLATFORM')
 
+
 def signup_button(): #here is some functions, this one define the actions when we click on the button to sign up
     c1 = courriel1.get_value()
     m1 = mdp1.get_value()
@@ -20,7 +21,7 @@ def signup_button(): #here is some functions, this one define the actions when w
         line = line.strip()
         l = line.split(',') #the following lines search in the database if the email already exist 
         if l[0] == c1: #if yes, it returns to the user that it already exist
-            colour1 = (200, 0, 0)
+            colour1 = (200, 0, 0) #we choose colour red in RGB for all messages important messages 
             fontObj = pygame.font.Font('freesansbold.ttf', 15)  
             text = fontObj.render("Already signed up email!", True, colour1)
             screen.blit(text, (550,320))
@@ -50,17 +51,18 @@ def signup_button(): #here is some functions, this one define the actions when w
 def login_button(): #this function check in the data base if the email associated to the password are in the database
     c2 = courriel2.get_value()
     m2 = mdp2.get_value()
+    flag=0
     file = open('File_username.csv', 'r')
     lines = file.readlines()
-    flag=0
     for line in lines:
         line = line.strip()
         l = line.split(',')
-        flag=0
-        if l[0] == c2 and l[1] == m2: #if yes, it imports another python file which is another window to open (work in progress...)
-            pygame_menu.events.EXIT #type: ignore
-            import Afterloginsettings
-            file.close()         
+        if l[0] == c2 and l[1] == m2: #if yes, it imports another python file which is another window to open
+            file.close
+            file=open('profile.csv', 'w')
+            line=file.write(f"{l[0]}, {l[1]}")
+            file.close()
+            import Afterloginsettings        
             flag=1
             return flag   
            
@@ -87,6 +89,7 @@ def start_the_game():
          
 level = pygame_menu.Menu('Select a Difficulty', 400, 400, theme=themes.THEME_SOLARIZED)
 level.add.selector('levels :', [('level1', 1), ('level2', 2)], onchange=set_difficulty)
+
 
 mainmenu = pygame_menu.Menu('Welcome to main menu!', 1280, 720, theme=themes.THEME_SOLARIZED) #theses few lines set up the different things to show on the main menu
 courriel1 = mainmenu.add.text_input('Email: ', default='Email', maxchar=20)
