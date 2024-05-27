@@ -62,8 +62,8 @@ def login_button(): #this function check in the data base if the email associate
             import Afterloginsettings
             file.close()         
             flag=1
-            return flag
-            
+            return flag   
+           
     if flag==0 and (l[0] != c2 or l[1] != m2): #if not, it returns to the user that there is an incorrect parameter
         colour1 = (200, 0, 0)
         fontObj = pygame.font.Font('freesansbold.ttf', 15)  
