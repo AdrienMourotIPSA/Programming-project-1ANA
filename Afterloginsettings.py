@@ -5,16 +5,22 @@ import pygame
 import pygame_menu
 from pygame_menu import themes
 from typing import Tuple, Any
+import subprocess
+import sys
 
 pygame.init() #here, we define the bases characteristics of the window to launch
 screen = pygame.display.set_mode((1280, 720))
 pygame.display.set_caption('IPSA GAME PLATFORM')
 
 def profile_button():
-    import ProfileMenu
+    subprocess.Popen([sys.executable, 'ProfileMenu.py'])
+    pygame.quit()
+    sys.exit()
 
 def htp_button():
-    import htpmenu
+    subprocess.Popen([sys.executable, 'htpmenu.py'])
+    pygame.quit()
+    sys.exit()
 
 def game_button():
     print("test game ok")

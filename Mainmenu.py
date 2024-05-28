@@ -5,9 +5,11 @@ import pygame
 import pygame_menu
 from pygame_menu import themes
 from typing import Tuple, Any
+import sys
+import subprocess
 
 pygame.init() #here, we define the bases characteristics of the window to launch
-screen = pygame.display.set_mode((1280, 720))
+screen = pygame.display.set_mode((1280 , 720))
 pygame.display.set_caption('IPSA GAME PLATFORM')
 
 
@@ -62,9 +64,10 @@ def login_button(): #this function check in the data base if the email associate
             file=open('profile.csv', 'w')
             line=file.write(f"{l[0]}, {l[1]}")
             file.close()
-            import Afterloginsettings        
+            subprocess.Popen([sys.executable, 'Afterloginsettings.py'])     
             flag=1
-            return flag   
+            pygame.quit()
+            sys.exit()
            
     if flag==0 and (l[0] != c2 or l[1] != m2): #if not, it returns to the user that there is an incorrect parameter
         colour1 = (200, 0, 0)
