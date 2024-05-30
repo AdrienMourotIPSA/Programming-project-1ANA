@@ -1,3 +1,6 @@
+## Created by Sarah Houyoux & André Pavlov & Adrien Mourot ##
+######################## 28/05/2024 #########################
+
 import pygame
 import pygame_textinput
 import sys
@@ -6,15 +9,15 @@ import os
 import csv
 import subprocess
 
-run=True
+run = True
 uploaded_image = None
 pygame.init()
-screen = pygame.display.set_mode((1280,720))
+screen = pygame.display.set_mode((1280, 720))
 pygame.display.set_caption("Profile")
 
 image_dir = "D:/Aero 1/2nd semester/AnGp121 - Programming project/Student_File-2024/charIcons/"
 WHITE = (255, 255, 255)
-BLUE = (0, 0, 128)
+BLACK = (0, 0, 0)
 
 files = os.listdir(image_dir)
 image_files = [f for f in files if f.endswith(".png")]
@@ -72,7 +75,31 @@ def save_profile(nickname, image_path):
         writer.writerow([nickname, image_path])
     print(f'Profile saved: {nickname}, {image_path}')
 
+def update_username_file(email, nickname):
+    # Read the current data from the file
+    with open('File_username.csv', mode='r', newline='') as file:
+        reader = csv.reader(file)
+        rows = list(reader)
+
+    # Find the row with the given email and update the nickname
+    for row in rows:
+        if row[0] == email:
+            row[2] = nickname
+            break
+
+    # Write the updated data back to the file
+    with open('File_username.csv', mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerows(rows)
+    print(f'File_username.csv updated with nickname: {nickname}')
+
+def get_logged_in_email():
+    with open('temp_email.txt', 'r') as f:
+        return f.read().strip()
+
 return_button = Button("Return", (screen.get_width() - 120, screen.get_height() - 60), font=36)
+
+logged_in_email = get_logged_in_email()
 
 while run:
     for event in pygame.event.get():
@@ -89,7 +116,7 @@ while run:
                     pygame.quit()
                     sys.exit()
 
-    screen.fill((239,231,211))
+    screen.fill((239, 231, 211))
 
     image_rects = []
     font = pygame.font.Font(None, 36)
@@ -99,10 +126,10 @@ while run:
     text = font.render(current_images[0]["name"], True, (0, 0, 0))
     screen.blit(text, (275, 390))
     choice1 = font.render("By clicking the image", True, (0, 0, 0))
-    choice2= font.render("By upload your image", True, (0, 0, 0))
-    between=font.render("OR", True, (0, 0, 0))
-    pseudo=font.render("write a nickname", True, (0, 0, 0))
-    title=font.render("Choose your charater", True, (0, 0, 0))
+    choice2 = font.render("By upload your image", True, (0, 0, 0))
+    between = font.render("OR", True, (0, 0, 0))
+    pseudo = font.render("write a nickname", True, (0, 0, 0))
+    title = font.render("Choose your character", True, (0, 0, 0))
     screen.blit(choice1, (200, 250))
     screen.blit(choice2, (830, 250))
     screen.blit(between, (625, 330))
@@ -121,17 +148,18 @@ while run:
             nickname = textinput.value
             image_path = uploaded_image_path if uploaded_image else os.path.join(image_dir, current_images[0]["name"] + ".png")
             save_profile(nickname, image_path)
-
+            update_username_file(logged_in_email, nickname)  # Update the username file with the new nickname
 
     pygame.draw.rect(screen, WHITE, (930,300, 75, 75))
     pygame.draw.rect(screen, WHITE, (875,430, 175, 40))
 
-    textinput.update(events) #type: ignore
+    textinput.update(events) #type:ignore
     screen.blit(textinput.surface, (880, 435))
 
     if uploaded_image:
         screen.blit(uploaded_image, (930, 300))
 
     return_button.show()
-    
+
     pygame.display.update()
+

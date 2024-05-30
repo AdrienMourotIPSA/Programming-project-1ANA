@@ -1,3 +1,6 @@
+##Created by Sarah Houyoux & André Pavlov & Adrien Mourot##
+########################28/05/2024#########################
+
 import pygame
 import sys
 import subprocess

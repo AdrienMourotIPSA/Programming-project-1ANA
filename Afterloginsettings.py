@@ -1,5 +1,5 @@
-##Created by Adrien Mourot##
-#########25/05/2024#########
+##Created by Sarah Houyoux & André Pavlov & Adrien Mourot##
+########################25/05/2024#########################
 
 import pygame
 import pygame_menu
@@ -26,10 +26,14 @@ def game_button():
     print("test game ok")
 
 def sb_button():
-    print("test sb ok")
+    subprocess.Popen([sys.executable, 'sbmenu.py'])
+    pygame.quit()
+    sys.exit()
 
 def mg_button():
-    print("test mg ok")
+    subprocess.Popen([sys.executable, 'htpmenu.py'])
+    pygame.quit()
+    sys.exit()
 
 def settings_button():
     print("test settings ok")

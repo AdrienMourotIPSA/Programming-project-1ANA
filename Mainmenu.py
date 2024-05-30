@@ -1,5 +1,5 @@
-##Created by Adrien Mourot##
-#########24/05/2024#########
+## Created by Sarah Houyoux & André Pavlov & Adrien Mourot ##
+##########################24/05/2024#########################
 
 import pygame
 import pygame_menu
@@ -33,7 +33,7 @@ def signup_button(): #here is some functions, this one define the actions when w
     if flag==0: #if not, it returns that the user is now registered
         if len(m1)>6:
             file=open("File_username.csv", "a")
-            file.write(f"\n{c1},{m1}")
+            file.write(f"\n{c1},{m1},")
             colour1 = (200, 0, 0)
             fontObj = pygame.font.Font('freesansbold.ttf', 15)  
             text = fontObj.render("New user is registered!", True, colour1)
@@ -48,7 +48,7 @@ def signup_button(): #here is some functions, this one define the actions when w
             screen.blit(text, (475,320))
             pygame.display.update()
             pygame.time.delay(1000)
-            
+
 
 def login_button(): #this function check in the data base if the email associated to the password are in the database
     c2 = courriel2.get_value()
@@ -60,10 +60,9 @@ def login_button(): #this function check in the data base if the email associate
         line = line.strip()
         l = line.split(',')
         if l[0] == c2 and l[1] == m2: #if yes, it imports another python file which is another window to open
-            file.close
-            file=open('profile.csv', 'w')
-            line=file.write(f"{l[0]}, {l[1]}")
             file.close()
+            with open('temp_email.txt', 'w') as temp_file:
+                temp_file.write(c2)
             subprocess.Popen([sys.executable, 'Afterloginsettings.py'])     
             flag=1
             pygame.quit()
@@ -77,7 +76,6 @@ def login_button(): #this function check in the data base if the email associate
         pygame.display.update()
         pygame.time.delay(1000)
         flag=1  
-
 
 
 difficulty = 1
@@ -95,11 +93,11 @@ level.add.selector('levels :', [('level1', 1), ('level2', 2)], onchange=set_diff
 
 
 mainmenu = pygame_menu.Menu('Welcome to main menu!', 1280, 720, theme=themes.THEME_SOLARIZED) #theses few lines set up the different things to show on the main menu
-courriel1 = mainmenu.add.text_input('Email: ', default='Email', maxchar=20)
+courriel1 = mainmenu.add.text_input('Email: ', default='Email', maxchar=30)
 mdp1 = mainmenu.add.text_input('Password: ', default='Password', maxchar=20)
 mainmenu.add.button('Sign up', signup_button)
 mainmenu.add.text_input('',maxchar=0)
-courriel2 = mainmenu.add.text_input('Email: ', default='Email', maxchar=20)
+courriel2 = mainmenu.add.text_input('Email: ', default='Email', maxchar=30)
 mdp2 = mainmenu.add.text_input('Password: ',default='Password', maxchar=20)
 mainmenu.add.button('Log in', login_button)
 mainmenu.add.text_input('',maxchar=0)

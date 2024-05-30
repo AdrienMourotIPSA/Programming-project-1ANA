@@ -14,8 +14,8 @@ pygame.display.set_caption("Click Image to Open New Window")
 WHITE = (255, 255, 255)
 
 # Load the images
-images = [pygame.image.load("D:/Google Drive/IPSA/2023-2024/Semester2 - GrandProject/Student_File-EN/example-image.jpg"), 
-          pygame.image.load("D:/Google Drive/IPSA/2023-2024/Semester2 - GrandProject/Student_File-EN/example-image.jpg"),
+images = [pygame.image.load(r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Snake\Graphics\apple.png"), 
+          pygame.image.load(r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Starfield\img\starfield.png"),
           ]
 
 # Get the image dimensions
