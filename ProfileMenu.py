@@ -13,7 +13,7 @@ run = True
 uploaded_image = None
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
-pygame.display.set_caption("Profile")
+pygame.display.set_caption("Profile Menu")
 
 image_dir = "D:/Aero 1/2nd semester/AnGp121 - Programming project/Student_File-2024/charIcons/"
 WHITE = (255, 255, 255)
@@ -148,7 +148,7 @@ while run:
             nickname = textinput.value
             image_path = uploaded_image_path if uploaded_image else os.path.join(image_dir, current_images[0]["name"] + ".png")
             save_profile(nickname, image_path)
-            update_username_file(logged_in_email, nickname)  # Update the username file with the new nickname
+            update_username_file(logged_in_email, nickname)
 
     pygame.draw.rect(screen, WHITE, (930,300, 75, 75))
     pygame.draw.rect(screen, WHITE, (875,430, 175, 40))

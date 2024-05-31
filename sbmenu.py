@@ -12,7 +12,7 @@ import numpy as np
 
 pygame.init() #here, we define the bases characteristics of the window to launch
 screen = pygame.display.set_mode((1280 , 720))
-pygame.display.set_caption('Score Board')
+pygame.display.set_caption('Score Board Menu')
 
 def profile():
     with open('profile.csv', 'r') as file:

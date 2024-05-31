@@ -31,12 +31,14 @@ def sb_button():
     sys.exit()
 
 def mg_button():
-    subprocess.Popen([sys.executable, 'htpmenu.py'])
+    subprocess.Popen([sys.executable, 'mgmenu.py'])
     pygame.quit()
     sys.exit()
 
 def settings_button():
-    print("test settings ok")
+    subprocess.Popen([sys.executable, 'settingsmenu.py'])
+    pygame.quit()
+    sys.exit()
 
 
 

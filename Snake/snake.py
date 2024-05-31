@@ -7,24 +7,24 @@ class SNAKE:
 		self.direction = Vector2(0,0)
 		self.new_block = False
 
-		self.head_up = pygame.image.load('D:/Google Drive/IPSA/2023-2024/Semester2 - GrandProject/ESCAPE_GAME_v2/Snake-main/Graphics/head_up.png').convert_alpha()
-		self.head_down = pygame.image.load('D:/Google Drive/IPSA/2023-2024/Semester2 - GrandProject/ESCAPE_GAME_v2/Snake-main/Graphics/head_down.png').convert_alpha()
-		self.head_right = pygame.image.load('D:/Google Drive/IPSA/2023-2024/Semester2 - GrandProject/ESCAPE_GAME_v2/Snake-main/Graphics/head_right.png').convert_alpha()
-		self.head_left = pygame.image.load('D:/Google Drive/IPSA/2023-2024/Semester2 - GrandProject/ESCAPE_GAME_v2/Snake-main/Graphics/head_left.png').convert_alpha()
+		self.head_up = pygame.image.load(r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Snake\Graphics\head_up.png").convert_alpha()
+		self.head_down = pygame.image.load(r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Snake\Graphics\head_down.png").convert_alpha()
+		self.head_right = pygame.image.load(r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Snake\Graphics\head_right.png").convert_alpha()
+		self.head_left = pygame.image.load(r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Snake\Graphics\head_left.png").convert_alpha()
 		
-		self.tail_up = pygame.image.load('D:/Google Drive/IPSA/2023-2024/Semester2 - GrandProject/ESCAPE_GAME_v2/Snake-main/Graphics/tail_up.png').convert_alpha()
-		self.tail_down = pygame.image.load('D:/Google Drive/IPSA/2023-2024/Semester2 - GrandProject/ESCAPE_GAME_v2/Snake-main/Graphics/tail_down.png').convert_alpha()
-		self.tail_right = pygame.image.load('D:/Google Drive/IPSA/2023-2024/Semester2 - GrandProject/ESCAPE_GAME_v2/Snake-main/Graphics/tail_right.png').convert_alpha()
-		self.tail_left = pygame.image.load('D:/Google Drive/IPSA/2023-2024/Semester2 - GrandProject/ESCAPE_GAME_v2/Snake-main/Graphics/tail_left.png').convert_alpha()
+		self.tail_up = pygame.image.load(r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Snake\Graphics\tail_up.png").convert_alpha()
+		self.tail_down = pygame.image.load(r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Snake\Graphics\tail_down.png").convert_alpha()
+		self.tail_right = pygame.image.load(r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Snake\Graphics\tail_right.png").convert_alpha()
+		self.tail_left = pygame.image.load(r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Snake\Graphics\tail_left.png").convert_alpha()
 
-		self.body_vertical = pygame.image.load('D:/Google Drive/IPSA/2023-2024/Semester2 - GrandProject/ESCAPE_GAME_v2/Snake-main/Graphics/body_vertical.png').convert_alpha()
-		self.body_horizontal = pygame.image.load('D:/Google Drive/IPSA/2023-2024/Semester2 - GrandProject/ESCAPE_GAME_v2/Snake-main/Graphics/body_horizontal.png').convert_alpha()
+		self.body_vertical = pygame.image.load(r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Snake\Graphics\body_vertical.png").convert_alpha()
+		self.body_horizontal = pygame.image.load(r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Snake\Graphics\body_horizontal.png").convert_alpha()
 
-		self.body_tr = pygame.image.load('D:/Google Drive/IPSA/2023-2024/Semester2 - GrandProject/ESCAPE_GAME_v2/Snake-main/Graphics/body_tr.png').convert_alpha()
-		self.body_tl = pygame.image.load('D:/Google Drive/IPSA/2023-2024/Semester2 - GrandProject/ESCAPE_GAME_v2/Snake-main/Graphics/body_tl.png').convert_alpha()
-		self.body_br = pygame.image.load('D:/Google Drive/IPSA/2023-2024/Semester2 - GrandProject/ESCAPE_GAME_v2/Snake-main/Graphics/body_br.png').convert_alpha()
-		self.body_bl = pygame.image.load('D:/Google Drive/IPSA/2023-2024/Semester2 - GrandProject/ESCAPE_GAME_v2/Snake-main/Graphics/body_bl.png').convert_alpha()
-		self.crunch_sound = pygame.mixer.Sound('D:/Google Drive/IPSA/2023-2024/Semester2 - GrandProject/ESCAPE_GAME_v2/Snake-main/Sound/crunch.wav')
+		self.body_tr = pygame.image.load(r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Snake\Graphics\body_tr.png").convert_alpha()
+		self.body_tl = pygame.image.load(r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Snake\Graphics\body_tl.png").convert_alpha()
+		self.body_br = pygame.image.load(r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Snake\Graphics\body_br.png").convert_alpha()
+		self.body_bl = pygame.image.load(r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Snake\Graphics\body_bl.png").convert_alpha()
+		self.crunch_sound = pygame.mixer.Sound(r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Snake\Sound\crunch.wav")
 
 	def draw_snake(self):
 		self.update_head_graphics()
@@ -177,11 +177,11 @@ cell_size = 40
 cell_number = 20
 screen = pygame.display.set_mode((cell_number * cell_size,cell_number * cell_size))
 clock = pygame.time.Clock()
-apple = pygame.image.load('D:/Google Drive/IPSA/2023-2024/Semester2 - GrandProject/ESCAPE_GAME_v2/Snake-main/Graphics/apple.png').convert_alpha()
-game_font = pygame.font.Font('D:/Google Drive/IPSA/2023-2024/Semester2 - GrandProject/ESCAPE_GAME_v2/Snake-main/Font/PoetsenOne-Regular.ttf', 25)
+apple = pygame.image.load(r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Snake\Graphics\apple.png").convert_alpha()
+game_font = pygame.font.Font(r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Snake\Font\PoetsenOne-Regular.ttf", 25)
 
 SCREEN_UPDATE = pygame.USEREVENT
-pygame.time.set_timer(SCREEN_UPDATE,150)
+pygame.time.set_timer(SCREEN_UPDATE,125)
 
 main_game = MAIN()
 

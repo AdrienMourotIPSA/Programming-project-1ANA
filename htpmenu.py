@@ -73,7 +73,7 @@ while True:
 
     profile_name=profile()
 
-    hello=font.render(f"Hello {profile_name} ,Let me explain how to play the game", True, (0, 100, 0))
+    hello=font.render(f"Hello {profile_name}. Let me explain how to play the game", True, (0, 100, 0))
     screen.blit(hello, (80,50 ))
 
     rule= font.render("Guess Who ?", True, (0, 0, 100))
