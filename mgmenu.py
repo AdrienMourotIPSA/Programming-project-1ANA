@@ -13,16 +13,16 @@ screen = pygame.display.set_mode((1280, 720))
 pygame.display.set_caption('More Games Menu')
 
 class Button:
-    def __init__(self, text, pos, font, bg="black", feedback=""):
+    def __init__(self, text, pos, font, bg=(4, 47, 58), feedback=""):
         self.x, self.y = pos
         self.font = pygame.font.Font(None, font)
         self.change_text(text, bg)
 
-    def change_text(self, text, bg="black"):
+    def change_text(self, text, bg=(4, 47, 58)):
         self.text = self.font.render(text, True, pygame.Color("white"))
         self.size = self.text.get_size()
         self.surface = pygame.Surface(self.size)
-        self.surface.fill(bg)
+        self.surface.fill((4, 47, 58))
         self.surface.blit(self.text, (0, 0))
         self.rect = pygame.Rect(self.x, self.y, self.size[0], self.size[1])
 
@@ -46,7 +46,7 @@ def start_snake_game():
     subprocess.Popen([sys.executable, r'D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Snake\snake.py'])
 
 def start_table_tennis_game():
-    show_message('Starting Table Tennis game...', Return_button)
+    subprocess.Popen([sys.executable, r'D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\TableTennis\Pong7_Score.py'])
 
 def start_starfield_game():
     subprocess.Popen([sys.executable, r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Starfield\Starfield.py"])
@@ -60,9 +60,9 @@ def show_message(message, callback=None):
 snake_image = pygame.image.load(r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Snake\Graphics\apple.png")
 table_tennis_image = pygame.image.load(r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\TableTennis\Ball.png")
 starfield_image = pygame.image.load(r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Starfield\img\playerShip1_orange.png")
-snake_rect = snake_image.get_rect(topleft=(125, 200))
-table_tennis_rect = table_tennis_image.get_rect(topleft=(525, 200))
-starfield_rect = starfield_image.get_rect(topleft=(925, 200))
+snake_rect = snake_image.get_rect(topleft=(200, 200))
+table_tennis_rect = table_tennis_image.get_rect(topleft=(600, 200))
+starfield_rect = starfield_image.get_rect(topleft=(1000, 200))
 
 return_button = Button("Return", (screen.get_width() - 120, screen.get_height() - 60), font=36)
 

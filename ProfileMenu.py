@@ -73,7 +73,6 @@ def save_profile(nickname, image_path):
         writer = csv.writer(file)
         writer.writerow(['Nickname', 'ImagePath'])
         writer.writerow([nickname, image_path])
-    print(f'Profile saved: {nickname}, {image_path}')
 
 def update_username_file(email, nickname):
     # Read the current data from the file
@@ -91,7 +90,6 @@ def update_username_file(email, nickname):
     with open('File_username.csv', mode='w', newline='') as file:
         writer = csv.writer(file)
         writer.writerows(rows)
-    print(f'File_username.csv updated with nickname: {nickname}')
 
 def get_logged_in_email():
     with open('temp_email.txt', 'r') as f:

@@ -23,16 +23,16 @@ def profile():
             return l[0]
 
 class Button:
-    def __init__(self, text, pos, font, bg="black", feedback=""):
+    def __init__(self, text, pos, font, bg=(4, 47, 58), feedback=""):
         self.x, self.y = pos
         self.font = pygame.font.Font(None, font)
         self.change_text(text, bg)
 
-    def change_text(self, text, bg="black"):
+    def change_text(self, text, bg=(4, 47, 58)):
         self.text = self.font.render(text, True, pygame.Color("white"))
         self.size = self.text.get_size()
         self.surface = pygame.Surface(self.size)
-        self.surface.fill(bg)
+        self.surface.fill((4, 47, 58))
         self.surface.blit(self.text, (0, 0))
         self.rect = pygame.Rect(self.x, self.y, self.size[0], self.size[1])
 
@@ -86,7 +86,7 @@ while run:
     profile_name=profile()
 
     font = pygame.font.Font(None, 36)
-    hello=font.render(f"Hello {profile_name} ,here is the Leaderboard!", True, (100, 100, 200))
+    hello=font.render(f"Hello {profile_name}, here is the Leaderboard!", True, (100, 100, 200))
     screen.blit(hello, (140,100 ))
     first=font.render("#1", True, (100, 0, 0))
     second=font.render("#2", True, (100, 0, 0))

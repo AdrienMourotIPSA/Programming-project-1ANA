@@ -23,7 +23,7 @@ def htp_button():
     sys.exit()
 
 def game_button():
-    print("test game ok")
+    subprocess.Popen([sys.executable, 'guesswho.py'])
 
 def sb_button():
     subprocess.Popen([sys.executable, 'sbmenu.py'])
@@ -42,10 +42,10 @@ def settings_button():
 
 
 
-mainmenu = pygame_menu.Menu('Menu: ', 1280, 720, theme=themes.THEME_SOLARIZED) #theses few lines set up the different things to show on the main menu
+mainmenu = pygame_menu.Menu('Menu', 1280, 720, theme=themes.THEME_SOLARIZED) #theses few lines set up the different things to show on the main menu
 mainmenu.add.button('Profile', profile_button)
 mainmenu.add.button('How to play', htp_button)
-mainmenu.add.button('Game', game_button)
+mainmenu.add.button('Guess Who Game', game_button)
 mainmenu.add.button('Score Board', sb_button)
 mainmenu.add.button('More Games', mg_button)
 mainmenu.add.button('Settings', settings_button)
