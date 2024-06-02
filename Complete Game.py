@@ -69,7 +69,7 @@ while run:
         if flag==0: #if not, it returns that the user is now registered
             if len(m1)>6:
                 file=open("File_username.csv", "a")
-                file.write(f"\n{c1},{m1},")
+                file.write(f"\n{c1},{m1},no nickname,0")
                 colour1 = (200, 0, 0)
                 fontObj = pygame.font.Font('freesansbold.ttf', 15)  
                 text = fontObj.render("New user is registered!", True, colour1)
