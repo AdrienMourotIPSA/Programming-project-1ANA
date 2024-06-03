@@ -1,6 +1,6 @@
 ## Created by Sarah Houyoux & André Pavlov & Adrien Mourot ##
 ##########################24/05/2024#########################
-                        ##Global code##
+                      ## Global code ##
 
 import pygame
 import pygame_menu
@@ -13,6 +13,9 @@ import subprocess
 import os
 import csv
 import random
+
+global difficulty
+difficulty = 1
 
 pygame.init() #here, we define the bases characteristics of the window to launch
 screen = pygame.display.set_mode((1280 , 720))
@@ -126,7 +129,7 @@ while run:
         profilemenu = pygame_menu.Menu('Menu', 1280, 720, theme=themes.THEME_SOLARIZED) #theses few lines set up the different things to show on the main menu
         profilemenu.add.button('Profile', profile_menu)
         profilemenu.add.button('How to play', htp_menu)
-        profilemenu.add.button('Guess Who Game', game_button)
+        profilemenu.add.button('Guess Who Game', guess_who_menu)
         profilemenu.add.button('Score Board', sb_menu)
         profilemenu.add.button('More Games', mg_menu)
         profilemenu.add.button('Settings', settings_menu)
@@ -138,67 +141,66 @@ while run:
     ### 28/05/2024 ###
 
     def profile_menu():
+        pygame.display.set_caption("Profile Menu")
+        uploaded_image = None
+        image_dir = "D:/Aero 1/2nd semester/AnGp121 - Programming project/Student_File-2024/charIcons/"
+        WHITE   = (255, 255, 255)
+        BLACK = (0, 0, 0)
+        files = os.listdir(image_dir)
+        image_files = [f for f in files if f.endswith(".png")]
+        images = [pygame.image.load(os.path.join(image_dir, f)) for f in image_files]
+        image_names = [f.replace(".png", "") for f in image_files]
+        current_images = {i: {"image": images[i], "name": image_names[i]} for i in range(len(images))}
+
+        textinput = pygame_textinput.TextInputVisualizer()
+        def draw_text(text, font, color, surface, x, y):
+            text_obj = font.render(text, True, color)
+            text_rect = text_obj.get_rect()
+            text_rect.topleft = (x, y)
+            surface.blit(text_obj, text_rect)
+
+        def upload_image():
+            Tk().withdraw()
+            file_path = filedialog.askopenfilename()
+            if file_path:
+                try:
+                    return pygame.image.load(file_path)
+                except pygame.error:
+                    print("Unable to load image.")
+            return None
+
+        def save_profile(nickname, image_path):
+            with open('profile.csv', mode='w', newline='') as file:
+                writer = csv.writer(file)
+                writer.writerow(['Nickname', 'ImagePath'])
+                writer.writerow([nickname, image_path])
+
+        def update_username_file(email, nickname):
+            # Read the current data from the file
+            with open('File_username.csv', mode='r', newline='') as file:
+                reader = csv.reader(file)
+                rows = list(reader)
+
+            # Find the row with the given email and update the nickname
+            for row in rows:
+                if row[0] == email:
+                    row[2] = nickname
+                    break
+
+            # Write the updated data back to the file
+            with open('File_username.csv', mode='w', newline='') as file:
+                writer = csv.writer(file)
+                writer.writerows(rows)
+
+        def get_logged_in_email():
+            with open('temp_email.txt', 'r') as f:
+                return f.read().strip()
+            
+        return_button = Button("Return", (screen.get_width() - 120, screen.get_height() - 60), font=36)
+
+        logged_in_email = get_logged_in_email()
         running_profile=True
         while running_profile:
-            pygame.display.set_caption("Profile Menu")
-            uploaded_image = None
-            image_dir = "D:/Aero 1/2nd semester/AnGp121 - Programming project/Student_File-2024/charIcons/"
-            WHITE   = (255, 255, 255)
-            BLACK = (0, 0, 0)
-            files = os.listdir(image_dir)
-            image_files = [f for f in files if f.endswith(".png")]
-            images = [pygame.image.load(os.path.join(image_dir, f)) for f in image_files]
-            image_names = [f.replace(".png", "") for f in image_files]
-            current_images = {i: {"image": images[i], "name": image_names[i]} for i in range(len(images))}
-
-            textinput = pygame_textinput.TextInputVisualizer()
-            def draw_text(text, font, color, surface, x, y):
-                text_obj = font.render(text, True, color)
-                text_rect = text_obj.get_rect()
-                text_rect.topleft = (x, y)
-                surface.blit(text_obj, text_rect)
-
-            def upload_image():
-                Tk().withdraw()
-                file_path = filedialog.askopenfilename()
-                if file_path:
-                    try:
-                        return pygame.image.load(file_path)
-                    except pygame.error:
-                        print("Unable to load image.")
-                return None
-
-            def save_profile(nickname, image_path):
-                with open('profile.csv', mode='w', newline='') as file:
-                    writer = csv.writer(file)
-                    writer.writerow(['Nickname', 'ImagePath'])
-                    writer.writerow([nickname, image_path])
-
-            def update_username_file(email, nickname):
-                # Read the current data from the file
-                with open('File_username.csv', mode='r', newline='') as file:
-                    reader = csv.reader(file)
-                    rows = list(reader)
-
-                # Find the row with the given email and update the nickname
-                for row in rows:
-                    if row[0] == email:
-                        row[2] = nickname
-                        break
-
-                # Write the updated data back to the file
-                with open('File_username.csv', mode='w', newline='') as file:
-                    writer = csv.writer(file)
-                    writer.writerows(rows)
-
-            def get_logged_in_email():
-                with open('temp_email.txt', 'r') as f:
-                    return f.read().strip()
-                
-            return_button = Button("Return", (screen.get_width() - 120, screen.get_height() - 60), font=36)
-
-            logged_in_email = get_logged_in_email()
-
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -261,6 +263,7 @@ while run:
 
 
     ## How to Play Menu ##
+    ##### 28/05/2024 #####
 
     def htp_menu():
         pygame.display.set_caption('How to Play Menu')
@@ -331,7 +334,8 @@ while run:
         Profile_name=r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\profile.csv"
         File_username_path=r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\File_username.csv"
         image_dir=r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\charIcons"
-
+        running_game=True 
+        
         def read_current_player():
             with open(Profile_name, 'r') as profile_file:
                 return profile_file.readline().strip()
@@ -347,11 +351,11 @@ while run:
                         row[2] = str(int(row[2]) + score_change)
                     writer.writerow(row)
 
-        def Game():
+        while running_game:
             pygame.init()
 
-            screen_width = 1300
-            screen_height = 750
+            screen_width = 1280
+            screen_height = 720
             screen = pygame.display.set_mode((screen_width, screen_height))
             pygame.display.set_caption("Guess Who Game")
             screen.fill((239, 231, 211))
@@ -359,33 +363,44 @@ while run:
 
             image_files = [f for f in os.listdir(image_dir) if os.path.isfile(os.path.join(image_dir, f))] #these lines allow to pick up somes images in the charIcons repertory
             random.shuffle(image_files)
-            selected_images = image_files[:22]
-            first_11_images = selected_images[:11]
-            second_11_images = selected_images[11:22]
+            selected_images = image_files[:64]
+            first_32_images = selected_images[:32]
+            second_32_images = selected_images[32:64]
 
 
-            loaded_images_first_set = [pygame.image.load(os.path.join(image_dir, img)) for img in first_11_images]
-            loaded_images_second_set = [pygame.image.load(os.path.join(image_dir, img)) for img in second_11_images]
+            loaded_images_first_set = [pygame.image.load(os.path.join(image_dir, img)) for img in first_32_images]
+            loaded_images_second_set = [pygame.image.load(os.path.join(image_dir, img)) for img in second_32_images]
 
             random_image_first_set = random.choice(loaded_images_first_set) #these two lines allow to choose a card for both players
             random_image_second_set = random.choice(loaded_images_second_set)
-
+            
             margin = 10
-            images_per_row = [6, 5]
-
+                     
             def calculate_positions(loaded_images):
                 positions = []
                 y_offset = 50
-                x_offset = (screen_width - sum([img.get_width() + margin for img in loaded_images[:6]]) + margin) // 2
-                for i in range(6):
-                    x_pos = x_offset + i * (loaded_images[i].get_width() + margin)
-                    positions.append((x_pos, y_offset))
-                y_offset += loaded_images[0].get_height() + margin
-                x_offset = (screen_width - sum([img.get_width() + margin for img in loaded_images[6:11]]) + margin) // 2
-                for i in range(5):
-                    x_pos = x_offset + i * (loaded_images[6 + i].get_width() + margin)
-                    positions.append((x_pos, y_offset))
-                return positions
+                if difficulty==1:
+                    x_offset = (screen_width - sum([img.get_width() + margin for img in loaded_images[:6]]) + margin) // 2
+                    for i in range(6):
+                        x_pos = x_offset + i * (loaded_images[i].get_width() + margin)
+                        positions.append((x_pos, y_offset))
+                    y_offset += loaded_images[0].get_height() + margin
+                    x_offset = (screen_width - sum([img.get_width() + margin for img in loaded_images[6:11]]) + margin) // 2
+                    for i in range(5):
+                        x_pos = x_offset + i * (loaded_images[6 + i].get_width() + margin)
+                        positions.append((x_pos, y_offset))
+                    return positions
+                elif difficulty==2:
+                    x_offset = (screen_width - sum([img.get_width() + margin for img in loaded_images[:8]]) + margin) // 2
+                    for i in range(8):
+                        x_pos = x_offset + i * (loaded_images[i].get_width() + margin)
+                        positions.append((x_pos, y_offset))
+                    y_offset += loaded_images[0].get_height() + margin
+                    x_offset = (screen_width - sum([img.get_width() + margin for img in loaded_images[8:15]]) + margin) // 2
+                    for i in range(7):
+                        x_pos = x_offset + i * (loaded_images[8 + i].get_width() + margin)
+                        positions.append((x_pos, y_offset))
+                    return positions
 
             positions_first_set = calculate_positions(loaded_images_first_set)
             positions_second_set = calculate_positions(loaded_images_second_set)
@@ -413,6 +428,7 @@ while run:
             current_player_username = read_current_player()
 
             running = True
+            return_button = Button("Return", (screen.get_width() - 100, screen.get_height() - 400), font=36)
             while running:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
@@ -437,16 +453,16 @@ while run:
                                 current_player = 2 if current_player == 1 else 1  
 
                         elif delete_mode:
-                            for i, pos in enumerate(positions_first_set if first_frame else positions_second_set):
-                                img_rect = (loaded_images_first_set if first_frame else loaded_images_second_set)[i].get_rect(topleft=pos)
+                            for i, pos in enumerate(positions_first_set if first_frame else positions_second_set): #type:ignore
+                                img_rect = (loaded_images_first_set if first_frame else loaded_images_second_set)[i].get_rect(topleft=pos) #type:ignore
                                 if img_rect.collidepoint(mouse_pos):
                                     del (loaded_images_first_set if first_frame else loaded_images_second_set)[i]
-                                    del (positions_first_set if first_frame else positions_second_set)[i]
+                                    del (positions_first_set if first_frame else positions_second_set)[i] #type:ignore
                                     break
 
                         elif guess_mode:
                             correct_guess = False
-                            for i, pos in enumerate(positions_first_set if first_frame else positions_second_set):
+                            for i, pos in enumerate(positions_first_set if first_frame else positions_second_set): #type:ignore
                                 img_rect = (loaded_images_first_set if first_frame else loaded_images_second_set)[i].get_rect(topleft=pos)
                                 if img_rect.collidepoint(mouse_pos):
                                     if (first_frame and (loaded_images_first_set[i] == random_image_first_set)) or \
@@ -483,7 +499,7 @@ while run:
                         screen.blit(waiting_text, waiting_text.get_rect(center=(screen_width // 2, screen_height // 2)))
                     else:
                         for img, pos in zip((loaded_images_first_set if first_frame else loaded_images_second_set),
-                                            (positions_first_set if first_frame else positions_second_set)):
+                                            (positions_first_set if first_frame else positions_second_set)): #type:ignore
                             screen.blit(img, pos)
 
                         random_image = random_image_first_set if not first_frame else random_image_second_set
@@ -504,15 +520,16 @@ while run:
                     switch_frame_button_text = font.render("Switch Frame", True, button_text_color)
                     screen.blit(switch_frame_button_text, switch_frame_button_text.get_rect(center=switch_frame_button_rect.center))
 
+                    if return_button.click(event):
+                        pygame.display.set_caption('IPSA GAME PLATFORM') 
+                        running_game=False
+                        afterloginmenu()
+                    
                 pygame.display.flip()
 
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    run=False
-
+                return_button.show()
             pygame.display.update()
         
-        Game()
     
     
     ## Score Board ##
@@ -642,7 +659,6 @@ while run:
     #### 31/05/2024 ###
  
     def settings_menu():
-        difficulty = 1
         pygame.display.set_caption('Settings')
         
         languages = {
@@ -658,6 +674,10 @@ while run:
                 'back': 'Back to Main Menu',
                 'quit': 'Quit',
                 'welcome': 'Welcome to Game Platform!',
+                'login': 'Log in',
+                'signup': 'Sign up',
+                'email': 'Email: ',
+                'password': 'Password: ',
             },
             'fr': {
                 'main_menu': 'Menu Principal',
@@ -671,6 +691,10 @@ while run:
                 'back': 'Retour au menu principal',
                 'quit': 'Quitter',
                 'welcome': 'Bienvenue sur la plateforme de jeux!',
+                'login': 'Se connecter',
+                'signup': 'S\'inscrire',
+                'email': 'Adresse e-mail: ',
+                'password': 'Mot de passe: ',
             }
         }
         current_language = 'en'
@@ -704,20 +728,20 @@ while run:
         
         def return_button():
                 pygame.display.set_caption('IPSA GAME PLATFORM')
-                global running_settings
-                running_settings=False
+                afterloginmenu()
         
         running_settings=True
 
         while running_settings:
             settings_menu = pygame_menu.Menu('Settings', 1280, 720, theme=themes.THEME_SOLARIZED)
             settings_menu.add.selector('Difficulty: ', [('Easy', 1), ('Hard', 2)], onchange=set_difficulty)
-            settings_menu.add.selector('Sound: ', [('On', 1), ('Off', 2)])
             settings_menu.add.selector(t('choose_language'), [('English', 'en'), ('Français', 'fr')], onchange=set_language)
             settings_menu.add.button('Back to Main Menu', return_button)
             settings_menu.mainloop(screen)
 
+    
     ## Main menu parameters ##
+
     mainmenu = pygame_menu.Menu('Welcome to main menu!', 1280, 720, theme=themes.THEME_SOLARIZED) #theses few lines set up the different things to show on the main menu
     courriel1 = mainmenu.add.text_input('Email: ', default='Email', maxchar=30)
     mdp1 = mainmenu.add.text_input('Password: ', default='Password', maxchar=20)

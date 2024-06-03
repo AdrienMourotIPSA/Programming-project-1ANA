@@ -8,13 +8,13 @@ from tkinter import Tk, filedialog
 import os
 import csv
 import subprocess
-clock = pygame.time.Clock()
 
 run = True
 uploaded_image = None
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
 pygame.display.set_caption("Profile Menu")
+clock = pygame.time.Clock()
 
 image_dir = "D:/Aero 1/2nd semester/AnGp121 - Programming project/Student_File-2024/charIcons/"
 WHITE = (255, 255, 255)
@@ -114,12 +114,20 @@ while run:
                     subprocess.Popen([sys.executable, 'Afterloginsettings.py'])
                     pygame.quit()
                     sys.exit()
+        elif event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
+            nickname = textinput.value
+            image_path = uploaded_image_path if uploaded_image else os.path.join(image_dir, current_images[0]["name"] + ".png")
+            save_profile(nickname, image_path)
+            update_username_file(logged_in_email, nickname)
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if 930 <= event.pos[0] <= 1005 and 300 <= event.pos[1] <= 375:
+                uploaded_image = uploaded_image_path = upload_image()
 
     screen.fill((239, 231, 211))
 
     image_rects = []
     font = pygame.font.Font(None, 36)
-
+    events = pygame.event.get()
     img_rect = screen.blit(current_images[0]["image"], (280, 300))
     image_rects.append(img_rect)
     text = font.render(current_images[0]["name"], True, (0, 0, 0))
@@ -135,25 +143,11 @@ while run:
     screen.blit(pseudo, (860, 390))
     screen.blit(title, (515, 100))
 
-    events = pygame.event.get()
-
-    for event in events:
-        if event.type == pygame.QUIT:
-            pygame.quit()
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            if 930 <= event.pos[0] <= 1005 and 300 <= event.pos[1] <= 375:
-                uploaded_image = uploaded_image_path = upload_image()
-        elif event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
-            nickname = textinput.value
-            image_path = uploaded_image_path if uploaded_image else os.path.join(image_dir, current_images[0]["name"] + ".png")
-            save_profile(nickname, image_path)
-            update_username_file(logged_in_email, nickname)
+    textinput.update(events) #type:ignore
+    screen.blit(textinput.surface, (880, 435))
 
     pygame.draw.rect(screen, WHITE, (930,300, 75, 75))
     pygame.draw.rect(screen, WHITE, (875,430, 175, 40))
-
-    textinput.update(events) #type:ignore
-    screen.blit(textinput.surface, (880, 435))
 
     if uploaded_image:
         screen.blit(uploaded_image, (930, 300))
@@ -161,5 +155,4 @@ while run:
     return_button.show()
 
     pygame.display.update()
-    clock = pygame.time.Clock()
-
+    clock.tick(60)  # Limit the frame rate to 60 FPS
