@@ -5,7 +5,6 @@
 
 import pygame
 import pygame_menu
-from pygame_menu import events
 from pygame_menu import Menu
 from pygame_menu import themes
 import pygame_textinput
