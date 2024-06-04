@@ -16,10 +16,179 @@ import random
 
 global difficulty
 difficulty = 1
+theme=1
+
+global languages
+languages = {
+            'en': {
+                'main_menu': 'Main Menu',
+                'Profile': 'Profile',
+                'How to play': 'How to Play',
+                'How to Play Menu':'How to play Menu',
+                'Guess Who Game': 'Guess Who Game',
+                'Score Board': 'Score Board',
+                'More Games': 'More Games',
+                'More Games Menu': 'More Games Menu',
+                'Settings': 'Settings',
+                'Choose language': 'Choose Language',
+                'Back to Main Menu': 'Back to Main Menu',
+                'Quit': 'Quit',
+                'Welcome to main menu!': 'Bienvenue sur la plateforme de jeux!',
+                'Log in': 'Log In',
+                'Sign up': 'Sign Up',
+                'Email: ': 'Email: ',
+                'Password: ': 'Password: ',
+                'Difficulty: ':'Difficulty:',
+                'Delete User': 'Delete account',
+                'New user is registered!': 'New user is registered',
+                'Already signed up email!': 'Already signed up email!',
+                'The password is too short (min 6 characters)': 'The password is too short (min 6 characters)',
+                'IPSA GAME PLATFORM': 'IPSA GAME PLATFORM',
+                'Return': 'Return',
+                'Ranks':'Ranks',
+                'Names':'Names',
+                'Score Board Menu': 'Score Board Menu',
+                'Switch Frame': 'Switch Frame',
+                'Your Guess': 'Your Guess',
+                'Delete': 'Delete',
+                'Next player\'s turn':'Next payer\'s turn',
+                'Your card':'Your card',
+                'wins!':'wins!',
+                'Player':'Player',
+                'Hello':'Hello',
+                'Let me explain how to play the game':'Let me explain how to play',
+                'Guess Who ?':'Guess Who ?',
+                'It\'s a two-player board game where players each':'It\'s a two-player board game where players each',
+                'guess the identity of the others chosen character.':'guess the identity of the others chosen character.',
+                'Player ask each other yes_no questions.':'Player ask each other closed questions.',
+                'For instance , hair color of the chosen character':'For instance , hair color of the chosen character',
+                'will help to evaluate many characters to':'will help to evaluate many characters to',
+                'make correct guest.':'make correct guest.',
+                'By clicking the image':'By clicking the image',
+                'By upload your image':'By uploading your image',
+                'OR':'OU',
+                'write a nickname':'write a nickname',
+                'Choose your character':'Choose your character',
+                'Unable to load image.':'Unable to load image.',
+                'Profile Menu':'Profile Menu',
+                'lost!':'lost!'
+            },
+            'fr': {
+                'main_menu': 'Menu Principal',
+                'Profile': 'Profil',
+                'How to play': 'Comment Jouer',
+                'How to Play Menu':'Menu "Comment Jouer"',
+                'Guess Who Game': 'Jeu Qui est-ce',
+                'Score Board': 'Tableau des Scores',
+                'More Games': 'Plus de Jeux',
+                'More Games Menu': 'Menu avec plus de Jeux',
+                'Settings': 'Paramètres',
+                'Choose language': 'Choisir la langue',
+                'Back to Main Menu': 'Retour au menu principal',
+                'Quit': 'Quitter',
+                'Welcome to main menu!': 'Bienvenue sur la plateforme de jeux!',
+                'Log in': 'Se connecter',
+                'Sign up': 'S\'inscrire',
+                'Email': 'Courriel: ',
+                'Password: ': 'Mot de passe: ',
+                'Difficulty: ': 'Difficulté:',
+                'Delete User': 'Supprimer le compte',
+                'New user is registered!': 'Nouveau compte enregistré',
+                'Already signed up email!': 'Courriel déjà enregistré',
+                'The password is too short (min 6 characters)': 'Le mot de passe est trop court (min 6 caractères)',
+                'IPSA GAME PLATFORM': 'PLATEFORME DE JEUX IPSA',
+                'Return': 'Retour',
+                'Ranks':'Rangs',
+                'Names':'Noms',
+                'Score Board Menu': 'Menu Podium',
+                'Switch Frame': 'Changer',
+                'Your Guess': 'Votre choix',
+                'Delete': 'Supprimer',
+                'Next player\'s turn':'Tour de l\'autre joueur',
+                'Your card':'Votre Carte',
+                'wins!':'gagnant!',
+                'Player':'Joueur',
+                'Hello':'Bonjour',
+                'Let me explain how to play the game':'Voici comment jouer au jeu',
+                'Guess Who ?':'Qui est-ce ?',
+                'It\'s a two-player board game where players each':'C\'est un jeu de plateau où chaque joueur',
+                'guess the identity of the others chosen character.':'choisit un personnage',
+                'Player ask each other yes_no questions.':'Le joueur demande à l\'autre des questions fermées.',
+                'For instance , hair color of the chosen character':'Par exemple, la couleur des cheveux',
+                'will help to evaluate many characters to':'va aider à évaluer plusieurs personnages',
+                'make correct guest.':'et faire le bon choix.',
+                'By clicking the image': 'En cliquant l\'image',
+                'By upload your image': 'En chargeant votre image',
+                'OR':'OU',
+                'write a nickname':'écrivez votre pseudo',
+                'Choose your character':'choisissez votre image',
+                'Unable to load image.':'impossible de charger l\'image',
+                'Profile Menu':'Menu du Profil',
+                'lost!':'perdant!'
+            },
+            'tr': {
+                'main_menu': 'Ana Menü',
+                'Profile': 'Profil',
+                'How to play': 'Oyunu Nasıl Oynanır',
+                'How to Play Menu': 'Nasıl Oynanır Menüsü',
+                'Guess Who Game': 'Kimse Söyle',
+                'Score Board': 'Puan Tablosu',
+                'More Games': 'Başka oyunlar',
+                'More Games Menu': 'Çıkış',
+                'Settings': 'Ayarlar',
+                'Choose language': 'Dil Seçin',
+                'Back to Main Menu': 'Ana Menüye Dön',
+                'Quit': 'Çıkış Yap',
+                'Welcome to main menu!': 'Oyun platformuna hoş geldiniz!',
+                'Log in': 'Giriş',
+                'Sign up': 'Kaydol',
+                'Email': 'E-posta: ',
+                'Password: ': 'Şifre: ',
+                'Difficulty: ': 'Zorluk:',
+                'Delete User': 'Kullanıcı Sil',
+                'New user is registered!': 'Yeni kullanıcı kaydedildi!',
+                'Already signed up email!': 'Bu e-posta zaten kayıtlı!',
+                'The password is too short (min 6 characters)': 'Şifre çok kısa (en az 6 karakter)',
+                'IPSA GAME PLATFORM': 'OYUN PLATFORMU IPSA',
+                'Return': 'Geri Dön',
+                'Ranks':'Sıralamalar',
+                'Names':'İsimler',
+                'Score Board Menu': 'Puan Tablosu Menüsü',
+                'Switch Frame': 'Değiştir',
+                'Your Guess': 'Tahmininiz',
+                'Delete': 'Sil',
+                'Next player\'s turn':'Sonraki oyuncunun turu',
+                'Your card':'Kartınız',
+                'wins!':'kazandı!',
+                'Player':'Oyuncu',
+                'Hello':'Merhaba',
+                'Let me explain how to play the game':'Oyun nasıl oynanırı öğreteyim',
+                'Guess Who ?':'Kimse Söyle?',
+                'It\'s a two-player board game where players each':'İki oyuncu için bir plaka oyunudur. Her oyuncu',
+                'guess the identity of the others chosen character.':'diğer oyuncunun seçtiği karakteri tahmin eder.',
+                'Player ask each other yes_no questions.':'Oyuncular birbirlerine evet-hayır sorular sorarlar.',
+                'For instance , hair color of the chosen character':'Örneğin, seçili karakterin saç rengi',
+                'will help to evaluate many characters to':'çok sayıda karakteri değerlendirmek için yardımcı olur.',
+                'make correct guest.':'doğru tahmin yapmak için.',
+                'By clicking the image': 'Resmi tıklayarak',
+                'By upload your image': 'Resim yükleyerek',
+                'OR':'VEYA',
+                'write a nickname':'bir takma ad yazın',
+                'Choose your character':'Karakterinizi seçin',
+                'Unable to load image.':'Resim yüklenemiyor.',
+                'Profile Menu':'Profil Menüsü',
+                'lost!':'kaybetti!'
+            }
+        }
+global current_language
+current_language = 'en'
+
+def t(key):
+    return languages[current_language][key]
 
 pygame.init() #here, we define the bases characteristics of the window to launch
 screen = pygame.display.set_mode((1280 , 720))
-pygame.display.set_caption('IPSA GAME PLATFORM')
+pygame.display.set_caption(t('IPSA GAME PLATFORM'))
 
 class Button:
     def __init__(self, text, pos, font, bg="black"):
@@ -50,102 +219,37 @@ run =True
 
 while run:
 
-    ## Main Menu - log in & Sign up##
-
-    def signup_button(): #here is some functions, this one define the actions when we click on the button to sign up
-        c1 = courriel1.get_value()
-        m1 = mdp1.get_value()
-        file = open('File_username.csv', 'r')
-        lines = file.readlines()
-        flag=0
-        for line in lines:
-            line = line.strip()
-            l = line.split(',') #the following lines search in the database if the email already exist 
-            if l[0] == c1: #if yes, it returns to the user that it already exist
-                colour1 = (200, 0, 0) #we choose colour red in RGB for all messages important messages 
-                fontObj = pygame.font.Font('freesansbold.ttf', 15)  
-                text = fontObj.render("Already signed up email!", True, colour1)
-                screen.blit(text, (550,320))
-                pygame.display.update()
-                pygame.time.delay(1000)
-                flag=1
-        if flag==0: #if not, it returns that the user is now registered
-            if len(m1)>6:
-                file=open("File_username.csv", "a")
-                file.write(f"\n{c1},{m1},no nickname,0")
-                colour1 = (200, 0, 0)
-                fontObj = pygame.font.Font('freesansbold.ttf', 15)  
-                text = fontObj.render("New user is registered!", True, colour1)
-                screen.blit(text, (560,320))
-                pygame.display.update()
-                pygame.time.delay(1000)
-                file.close()
-            elif len(m1)<6: #these few lines check if the password is much long as necessary
-                colour1 = (200, 0, 0)
-                fontObj = pygame.font.Font('freesansbold.ttf', 15)  
-                text = fontObj.render("The password is too short (min 6 characters)", True, colour1)
-                screen.blit(text, (475,320))
-                pygame.display.update()
-                pygame.time.delay(1000)
-
-
-    def login_button(): #this function check in the data base if the email associated to the password are in the database
-        c2 = courriel2.get_value()
-        m2 = mdp2.get_value()
-        flag=0
-        file = open('File_username.csv', 'r')
-        lines = file.readlines()
-        for line in lines:
-            line = line.strip()
-            l = line.split(',')
-            if l[0] == c2 and l[1] == m2: #if yes, it imports another python file which is another window to open
-                file.close()
-                with open('temp_email.txt', 'w') as temp_file:
-                    temp_file.write(c2)
-                    file.close()
-                afterloginmenu()
-                #subprocess.Popen([sys.executable, 'Afterloginsettings.py'])     
-                flag=1
-                #pygame.quit()
-                #sys.exit()
-            
-        if flag==0 and (l[0] != c2 or l[1] != m2): #if not, it returns to the user that there is an incorrect parameter
-            colour1 = (200, 0, 0)
-            fontObj = pygame.font.Font('freesansbold.ttf', 15)  
-            text = fontObj.render("Username or password is not correct!", True, colour1)
-            screen.blit(text, (500,320))
-            pygame.display.update()
-            pygame.time.delay(1000)
-            flag=1  
+    def profile():
+                with open('profile.csv', 'r') as file:
+                    lines = file.readlines()  # Read all lines
+                    if lines:
+                        last_line = lines[-1]  # Get the last line
+                        l = last_line.split(',')
+                        return l[0]
 
     ## Main menu after log in##
     #########25/05/2024########
 
     def afterloginmenu():
-        def game_button():
-            subprocess.Popen([sys.executable, 'guesswho.py'])
-
-
         profilemenu = pygame_menu.Menu('Menu', 1280, 720, theme=themes.THEME_SOLARIZED) #theses few lines set up the different things to show on the main menu
-        profilemenu.add.button('Profile', profile_menu)
-        profilemenu.add.button('How to play', htp_menu)
-        profilemenu.add.button('Guess Who Game', guess_who_menu)
-        profilemenu.add.button('Score Board', sb_menu)
-        profilemenu.add.button('More Games', mg_menu)
-        profilemenu.add.button('Settings', settings_menu)
+        profilemenu.add.button(t('Profile'), profile_menu)
+        profilemenu.add.button(t('How to play'), htp_menu)
+        profilemenu.add.button(t('Guess Who Game'), guess_who_menu)
+        profilemenu.add.button(t('Score Board'), sb_menu)
+        profilemenu.add.button(t('More Games'), mg_menu)
+        profilemenu.add.button(t('Settings'), settings_menu)
         profilemenu.add.text_input('',maxchar=0)
-        profilemenu.add.button('Quit', pygame_menu.events.EXIT) #type: ignore
+        profilemenu.add.button(t('Quit'), pygame_menu.events.EXIT) #type: ignore
         profilemenu.mainloop(screen)
     
     ## Profile Menu ##
     ### 28/05/2024 ###
 
     def profile_menu():
-        pygame.display.set_caption("Profile Menu")
+        pygame.display.set_caption(t("Profile Menu"))
         uploaded_image = None
         image_dir = "D:/Aero 1/2nd semester/AnGp121 - Programming project/Student_File-2024/charIcons/"
         WHITE   = (255, 255, 255)
-        BLACK = (0, 0, 0)
         files = os.listdir(image_dir)
         image_files = [f for f in files if f.endswith(".png")]
         images = [pygame.image.load(os.path.join(image_dir, f)) for f in image_files]
@@ -153,11 +257,6 @@ while run:
         current_images = {i: {"image": images[i], "name": image_names[i]} for i in range(len(images))}
 
         textinput = pygame_textinput.TextInputVisualizer()
-        def draw_text(text, font, color, surface, x, y):
-            text_obj = font.render(text, True, color)
-            text_rect = text_obj.get_rect()
-            text_rect.topleft = (x, y)
-            surface.blit(text_obj, text_rect)
 
         def upload_image():
             Tk().withdraw()
@@ -166,7 +265,7 @@ while run:
                 try:
                     return pygame.image.load(file_path)
                 except pygame.error:
-                    print("Unable to load image.")
+                    print(t("Unable to load image."))
             return None
 
         def save_profile(nickname, image_path):
@@ -196,7 +295,7 @@ while run:
             with open('temp_email.txt', 'r') as f:
                 return f.read().strip()
             
-        return_button = Button("Return", (screen.get_width() - 120, screen.get_height() - 60), font=36)
+        return_button = Button(t("Return"), (screen.get_width() - 120, screen.get_height() - 60), font=36)
 
         logged_in_email = get_logged_in_email()
         running_profile=True
@@ -211,7 +310,7 @@ while run:
                             current_images[pos]["image"] = images[(images.index(current_images[pos]["image"]) + 1) % len(images)]
                             current_images[pos]["name"] = image_names[(image_names.index(current_images[pos]["name"]) + 1) % len(image_names)]
                         elif return_button.click(event):
-                            pygame.display.set_caption('IPSA GAME PLATFORM')
+                            pygame.display.set_caption(t('IPSA GAME PLATFORM'))
                             running_profile=False
 
             screen.fill((239, 231, 211))
@@ -223,11 +322,11 @@ while run:
             image_rects.append(img_rect)
             text = font.render(current_images[0]["name"], True, (0, 0, 0))
             screen.blit(text, (275, 390))
-            choice1 = font.render("By clicking the image", True, (0, 0, 0))
-            choice2 = font.render("By upload your image", True, (0, 0, 0))
-            between = font.render("OR", True, (0, 0, 0))
-            pseudo = font.render("write a nickname", True, (0, 0, 0))
-            title = font.render("Choose your character", True, (0, 0, 0))
+            choice1 = font.render(t("By clicking the image"), True, (0, 0, 0))
+            choice2 = font.render(t("By upload your image"), True, (0, 0, 0))
+            between = font.render(t("OR"), True, (0, 0, 0))
+            pseudo = font.render(t("write a nickname"), True, (0, 0, 0))
+            title = font.render(t("Choose your character"), True, (0, 0, 0))
             screen.blit(choice1, (200, 250))
             screen.blit(choice2, (830, 250))
             screen.blit(between, (625, 330))
@@ -266,22 +365,14 @@ while run:
     ##### 28/05/2024 #####
 
     def htp_menu():
-        pygame.display.set_caption('How to Play Menu')
+        pygame.display.set_caption(t('How to Play Menu'))
         running_htp=True
-        while running_htp:
-            def profile():
-                with open('profile.csv', 'r') as file:
-                    lines = file.readlines()  # Read all lines
-                    if lines:
-                        last_line = lines[-1]  # Get the last line
-                        l = last_line.split(',')
-                        return l[0]
-            
+        while running_htp: 
             image1 = pygame.image.load("img_allchar.png")
             images = [image1]
             current_images = {i: {"image": images[i]} for i in range(len(images))}
 
-            return_button = Button("Return", (screen.get_width() - 120, screen.get_height() - 60), font=36)
+            return_button = Button(t("Return"), (screen.get_width() - 120, screen.get_height() - 60), font=36)
 
             for event in pygame.event.get():
                     if event.type == pygame.QUIT:
@@ -292,7 +383,7 @@ while run:
                             if img_rect.collidepoint(event.pos):
                                 current_images[pos]["image"] = images[(images.index(current_images[pos]["image"]) + 1) % len(images)]
                         if return_button.click(event):
-                            pygame.display.set_caption('IPSA GAME PLATFORM') 
+                            pygame.display.set_caption(t('IPSA GAME PLATFORM')) 
                             running_htp=False
             screen.fill((239, 231, 211))
 
@@ -304,23 +395,23 @@ while run:
 
             profile_name=profile()
 
-            hello=font.render(f"Hello {profile_name}. Let me explain how to play the game", True, (0, 100, 0))
+            hello=font.render(f"{t('Hello')} {profile_name}. {t('Let me explain how to play the game')}", True, (0, 100, 0))
             screen.blit(hello, (80,50 ))
 
-            rule= font.render("Guess Who ?", True, (0, 0, 100))
-            rule2= font.render("It's a two-player board game where players each", True, (0, 0, 100))
-            rule3= font.render("guess the identity of the others chosen character.", True, (0, 0, 100))
-            rule4= font.render("Player ask each other yes_no questions.", True, (0, 0, 100))
-            rule5= font.render("For instance , hair color of the chosen character", True, (0, 0, 100))
-            rule6= font.render("will help to evaluate many characters to", True, (0, 0, 100))
-            rule7= font.render("make correct guest.", True, (0, 0, 100))
-            screen.blit(rule, (640,150 ))
-            screen.blit(rule2, (640,200 ))
-            screen.blit(rule3, (640,250 ))
-            screen.blit(rule4, (640,300 ))
-            screen.blit(rule5, (640,350 ))
-            screen.blit(rule6, (640,400 ))
-            screen.blit(rule7, (640,450 ))
+            rule= font.render(t("Guess Who ?"), True, (0, 0, 100))
+            rule2= font.render(t("It's a two-player board game where players each"), True, (0, 0, 100))
+            rule3= font.render(t("guess the identity of the others chosen character."), True, (0, 0, 100))
+            rule4= font.render(t("Player ask each other yes_no questions."), True, (0, 0, 100))
+            rule5= font.render(t("For instance , hair color of the chosen character"), True, (0, 0, 100))
+            rule6= font.render(t("will help to evaluate many characters to"), True, (0, 0, 100))
+            rule7= font.render(t("make correct guest."), True, (0, 0, 100))
+            screen.blit(rule, (640,150))
+            screen.blit(rule2, (640,200))
+            screen.blit(rule3, (640,250))
+            screen.blit(rule4, (640,300))
+            screen.blit(rule5, (640,350))
+            screen.blit(rule6, (640,400))
+            screen.blit(rule7, (640,450))
 
             return_button.show()
 
@@ -331,8 +422,8 @@ while run:
     #### 01/06/2024 ####
 
     def guess_who_menu():
-        Profile_name=r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\profile.csv"
-        File_username_path=r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\File_username.csv"
+        Profile_name="profile.csv"
+        File_username_path="File_username.csv"
         image_dir=r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\charIcons"
         running_game=True 
         
@@ -357,15 +448,15 @@ while run:
             screen_width = 1280
             screen_height = 720
             screen = pygame.display.set_mode((screen_width, screen_height))
-            pygame.display.set_caption("Guess Who Game")
+            pygame.display.set_caption(t("Guess Who Game"))
             screen.fill((239, 231, 211))
 
 
             image_files = [f for f in os.listdir(image_dir) if os.path.isfile(os.path.join(image_dir, f))] #these lines allow to pick up somes images in the charIcons repertory
             random.shuffle(image_files)
-            selected_images = image_files[:64]
-            first_32_images = selected_images[:32]
-            second_32_images = selected_images[32:64]
+            selected_images = image_files[:29]
+            first_32_images = selected_images[:14]
+            second_32_images = selected_images[14:29]
 
 
             loaded_images_first_set = [pygame.image.load(os.path.join(image_dir, img)) for img in first_32_images]
@@ -406,7 +497,7 @@ while run:
             positions_second_set = calculate_positions(loaded_images_second_set)
 
             font = pygame.font.Font(None, 36)
-            text = "Your card"
+            text = t("Your card")
             text_color = (0, 0, 0)
             text_surface = font.render(text, True, text_color)
 
@@ -428,7 +519,7 @@ while run:
             current_player_username = read_current_player()
 
             running = True
-            return_button = Button("Return", (screen.get_width() - 100, screen.get_height() - 400), font=36)
+            return_button = Button(t("Return"), (screen.get_width() - 100, screen.get_height() - 400), font=36)
             while running:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
@@ -470,7 +561,7 @@ while run:
                                         screen.fill((239, 231, 211))
                                         win_frame_rect = pygame.Rect((screen_width // 2 - 100, screen_height // 2 - 50, 200, 100))
                                         pygame.draw.rect(screen, (239, 231, 211), win_frame_rect)
-                                        win_text = font.render(f"Player {current_player} wins!", True, (0, 0, 0))
+                                        win_text = font.render(f"{t('Player')} {current_player} {t('wins!')}", True, (0, 0, 0))
                                         screen.blit(win_text, win_text.get_rect(center=win_frame_rect.center))
                                         pygame.display.flip()
                                         pygame.time.wait(3000)
@@ -483,7 +574,7 @@ while run:
                                 screen.fill((239, 231, 211))
                                 lose_frame_rect = pygame.Rect((screen_width // 2 - 100, screen_height // 2 - 50, 200, 100))
                                 pygame.draw.rect(screen, (239, 231, 211), lose_frame_rect)
-                                lose_text = font.render(f"Player {current_player} lost!", True, (0, 0, 0))
+                                lose_text = font.render(f"{t('Player')} {current_player} {t('lost!')}", True, (0, 0, 0))
                                 screen.blit(lose_text, lose_text.get_rect(center=lose_frame_rect.center))
                                 pygame.display.flip()
                                 pygame.time.wait(3000)
@@ -495,7 +586,7 @@ while run:
                     screen.fill((239, 231, 211))
 
                     if waiting_frame:
-                        waiting_text = font.render("Next player's turn", True, (0, 0, 0))
+                        waiting_text = font.render(t("Next player's turn"), True, (0, 0, 0))
                         screen.blit(waiting_text, waiting_text.get_rect(center=(screen_width // 2, screen_height // 2)))
                     else:
                         for img, pos in zip((loaded_images_first_set if first_frame else loaded_images_second_set),
@@ -509,19 +600,19 @@ while run:
 
                     button_color = (4, 47, 58)
                     pygame.draw.rect(screen, button_color, delete_button_rect)
-                    delete_button_text = font.render("Delete", True, button_text_color)
+                    delete_button_text = font.render(t("Delete"), True, button_text_color)
                     screen.blit(delete_button_text, delete_button_text.get_rect(center=delete_button_rect.center))
 
                     pygame.draw.rect(screen, button_color, guess_button_rect)
-                    guess_button_text = font.render("Your Guess", True, button_text_color)
+                    guess_button_text = font.render(t("Your Guess"), True, button_text_color)
                     screen.blit(guess_button_text, guess_button_text.get_rect(center=guess_button_rect.center))
 
                     pygame.draw.rect(screen, button_color, switch_frame_button_rect)
-                    switch_frame_button_text = font.render("Switch Frame", True, button_text_color)
+                    switch_frame_button_text = font.render(t("Switch Frame"), True, button_text_color)
                     screen.blit(switch_frame_button_text, switch_frame_button_text.get_rect(center=switch_frame_button_rect.center))
 
                     if return_button.click(event):
-                        pygame.display.set_caption('IPSA GAME PLATFORM') 
+                        pygame.display.set_caption(t('IPSA GAME PLATFORM')) 
                         running_game=False
                         afterloginmenu()
                     
@@ -537,7 +628,7 @@ while run:
 
     def sb_menu():
         running_sb=True
-        pygame.display.set_caption('Score Board Menu')
+        pygame.display.set_caption(t('Score Board Menu'))
         def profile():
             with open('profile.csv', 'r') as file:
                 lines = file.readlines()  # Read all lines
@@ -546,7 +637,7 @@ while run:
                     l = last_line.split(',')
                     return l[0]
                 
-        return_button = Button("Return", (screen.get_width() - 120, screen.get_height() - 60), font=36)
+        return_button = Button(t("Return"), (screen.get_width() - 120, screen.get_height() - 60), font=36)
         while running_sb:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -554,7 +645,7 @@ while run:
                     sys.exit()
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     if return_button.click(event):
-                        pygame.display.set_caption('IPSA GAME PLATFORM') 
+                        pygame.display.set_caption(t('IPSA GAME PLATFORM')) 
                         running_sb=False
 
             screen.fill((239, 231, 211))
@@ -586,9 +677,9 @@ while run:
             screen.blit(first, (450,325 ))
             screen.blit(second, (450,400 ))
             screen.blit(third, (450,475 ))
-            rank=font.render("Ranks", True, (100, 0, 0))
+            rank=font.render(t("Ranks"), True, (100, 0, 0))
             screen.blit(rank, (450,250 ))
-            names=font.render("Names", True, (0, 0, 100))
+            names=font.render(t("Names"), True, (0, 0, 100))
             score=font.render("Scores", True, (0, 0, 100))
             screen.blit(names, (140,250 ))
             screen.blit(score, (300,250 ))
@@ -609,7 +700,7 @@ while run:
     ##### 30/05/2024 ####
 
     def mg_menu():
-        pygame.display.set_caption('More Games Menu')
+        pygame.display.set_caption(t('More Games Menu'))
         def start_snake_game():
             subprocess.Popen([sys.executable, r'D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Snake\snake.py'])
 
@@ -626,7 +717,7 @@ while run:
         table_tennis_rect = table_tennis_image.get_rect(topleft=(600, 200))
         starfield_rect = starfield_image.get_rect(topleft=(1000, 200))
 
-        return_button = Button("Return", (screen.get_width() - 120, screen.get_height() - 60), font=36)
+        return_button = Button(t("Return"), (screen.get_width() - 120, screen.get_height() - 60), font=36)
 
         running_sb=True
 
@@ -647,7 +738,7 @@ while run:
                     elif starfield_rect.collidepoint(event.pos):
                         start_starfield_game()
                     elif return_button.click(event):
-                        pygame.display.set_caption('IPSA GAME PLATFORM') 
+                        pygame.display.set_caption(t('IPSA GAME PLATFORM')) 
                         running_sb=False
             
             return_button.show()
@@ -659,48 +750,7 @@ while run:
     #### 31/05/2024 ###
  
     def settings_menu():
-        pygame.display.set_caption('Settings')
-        
-        languages = {
-            'en': {
-                'main_menu': 'Main Menu',
-                'profile': 'Profile',
-                'how_to_play': 'How to Play',
-                'game': 'Game',
-                'score_board': 'Score Board',
-                'more_games': 'More Games',
-                'settings': 'Settings',
-                'choose_language': 'Choose Language',
-                'back': 'Back to Main Menu',
-                'quit': 'Quit',
-                'welcome': 'Welcome to Game Platform!',
-                'login': 'Log in',
-                'signup': 'Sign up',
-                'email': 'Email: ',
-                'password': 'Password: ',
-            },
-            'fr': {
-                'main_menu': 'Menu Principal',
-                'profile': 'Profil',
-                'how_to_play': 'Comment Jouer',
-                'game': 'Jeu',
-                'score_board': 'Tableau des Scores',
-                'more_games': 'Plus de Jeux',
-                'settings': 'Paramètres',
-                'choose_language': 'Choisir la langue',
-                'back': 'Retour au menu principal',
-                'quit': 'Quitter',
-                'welcome': 'Bienvenue sur la plateforme de jeux!',
-                'login': 'Se connecter',
-                'signup': 'S\'inscrire',
-                'email': 'Adresse e-mail: ',
-                'password': 'Mot de passe: ',
-            }
-        }
-        current_language = 'en'
-
-        def t(key):
-            return languages[current_language][key]
+        pygame.display.set_caption(t('Settings'))
 
         def set_language(value, lang):
             global current_language
@@ -726,30 +776,114 @@ while run:
                 writer = csv.writer(file)
                 writer.writerows(lines)
         
+        def deleteuser_button():
+            name_of_the_profile=profile()
+            with open('File_username.csv','r')as file:
+                reader = csv.reader(file)
+                rows = list(reader)
+
+            with open('FIle_username.csv','w',newline='')as file:
+                writer=csv.writer(file)
+                for row in rows:
+                    if row[2] != name_of_the_profile:
+                        writer.writerow(row)  
+            main_menu()
+
         def return_button():
-                pygame.display.set_caption('IPSA GAME PLATFORM')
-                afterloginmenu()
+            pygame.display.set_caption(t('IPSA GAME PLATFORM'))
+            afterloginmenu()
         
         running_settings=True
 
         while running_settings:
-            settings_menu = pygame_menu.Menu('Settings', 1280, 720, theme=themes.THEME_SOLARIZED)
-            settings_menu.add.selector('Difficulty: ', [('Easy', 1), ('Hard', 2)], onchange=set_difficulty)
-            settings_menu.add.selector(t('choose_language'), [('English', 'en'), ('Français', 'fr')], onchange=set_language)
-            settings_menu.add.button('Back to Main Menu', return_button)
+            settings_menu = pygame_menu.Menu(t('Settings'), 1280, 720, theme=themes.THEME_SOLARIZED)
+            settings_menu.add.selector(t('Difficulty: '), [('Easy', 1), ('Hard', 2)], onchange=set_difficulty)
+            settings_menu.add.selector(t('Choose language'), [('English', 'en'), ('Français', 'fr'), ('Türkçe', 'tr')], onchange=set_language)
+            settings_menu.add.button(t('Delete User'), deleteuser_button)
+            settings_menu.add.button(t('Back to Main Menu'), return_button)
             settings_menu.mainloop(screen)
 
     
     ## Main menu parameters ##
 
-    mainmenu = pygame_menu.Menu('Welcome to main menu!', 1280, 720, theme=themes.THEME_SOLARIZED) #theses few lines set up the different things to show on the main menu
-    courriel1 = mainmenu.add.text_input('Email: ', default='Email', maxchar=30)
-    mdp1 = mainmenu.add.text_input('Password: ', default='Password', maxchar=20)
-    mainmenu.add.button('Sign up', signup_button)
-    mainmenu.add.text_input('',maxchar=0)
-    courriel2 = mainmenu.add.text_input('Email: ', default='Email', maxchar=30)
-    mdp2 = mainmenu.add.text_input('Password: ',default='Password', maxchar=20)
-    mainmenu.add.button('Log in', login_button)
-    mainmenu.add.text_input('',maxchar=0)
-    mainmenu.add.button('Quit', pygame_menu.events.EXIT) # type: ignore
-    mainmenu.mainloop(screen)
+    def main_menu():
+            ## Main Menu - log in & Sign up##
+
+        def signup_button(): #here is some functions, this one define the actions when we click on the button to sign up
+            c1 = courriel1.get_value()
+            m1 = mdp1.get_value()
+            file = open('File_username.csv', 'r')
+            lines = file.readlines()
+            flag=0
+            for line in lines:
+                line = line.strip()
+                l = line.split(',') #the following lines search in the database if the email already exist 
+                if l[0] == c1: #if yes, it returns to the user that it already exist
+                    colour1 = (200, 0, 0) #we choose colour red in RGB for all messages important messages 
+                    fontObj = pygame.font.Font('freesansbold.ttf', 15)  
+                    text = fontObj.render(t("Already signed up email!"), True, colour1)
+                    screen.blit(text, (550,320))
+                    pygame.display.update()
+                    pygame.time.delay(1000)
+                    flag=1
+            if flag==0: #if not, it returns that the user is now registered
+                if len(m1)>6:
+                    file=open("File_username.csv", "a")
+                    file.write(f"{c1},{m1},no nickname,0\n")
+                    colour1 = (200, 0, 0)
+                    fontObj = pygame.font.Font('freesansbold.ttf', 15)  
+                    text = fontObj.render(t("New user is registered!"), True, colour1)
+                    screen.blit(text, (560,320))
+                    pygame.display.update()
+                    pygame.time.delay(1000)
+                    file.close()
+                elif len(m1)<6: #these few lines check if the password is much long as necessary
+                    colour1 = (200, 0, 0)
+                    fontObj = pygame.font.Font('freesansbold.ttf', 15)  
+                    text = fontObj.render(t("The password is too short (min 6 characters)"), True, colour1)
+                    screen.blit(text, (475,320))
+                    pygame.display.update()
+                    pygame.time.delay(1000)
+
+
+        def login_button(): #this function check in the data base if the email associated to the password are in the database
+            global c2
+            c2 = courriel2.get_value()
+            m2 = mdp2.get_value()
+            flag=0
+            file = open('File_username.csv', 'r')
+            lines = file.readlines()
+            for line in lines:
+                line = line.strip()
+                l = line.split(',')
+                if l[0] == c2 and l[1] == m2: #if yes, it imports another python file which is another window to open
+                    file.close()
+                    with open('temp_email.txt', 'w') as temp_file:
+                        temp_file.write(c2)
+                        file.close()
+                    afterloginmenu()   
+                    flag=1
+                
+            if flag==0 and (l[0] != c2 or l[1] != m2): #if not, it returns to the user that there is an incorrect parameter
+                colour1 = (200, 0, 0)
+                fontObj = pygame.font.Font('freesansbold.ttf', 15)  
+                text = fontObj.render("Username or password is not correct!", True, colour1)
+                screen.blit(text, (500,320))
+                pygame.display.update()
+                pygame.time.delay(1000)
+                flag=1 
+
+        mainmenu = pygame_menu.Menu(t('Welcome to main menu!'), 1280, 720, theme=themes.THEME_SOLARIZED) #theses few lines set up the different things to show on the main menu
+        courriel1 = mainmenu.add.text_input(t('Email: '), default='Email', maxchar=30)
+        mdp1 = mainmenu.add.text_input(t('Password: '), default='Password', maxchar=20)
+        mainmenu.add.button(t('Sign up'), signup_button)
+        mainmenu.add.text_input('',maxchar=0)
+        courriel2 = mainmenu.add.text_input(t('Email: '), default='Email', maxchar=30)
+        mdp2 = mainmenu.add.text_input(t('Password: '),default='Password', maxchar=20)
+        mainmenu.add.button(t('Log in'), login_button)
+        mainmenu.add.text_input('',maxchar=0)
+        mainmenu.add.button(t('Quit'), pygame_menu.events.EXIT) # type: ignore
+        mainmenu.mainloop(screen)
+    
+    
+    main_menu()
