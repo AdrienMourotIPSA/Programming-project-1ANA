@@ -1,7 +1,6 @@
 ## Created by Sarah Houyoux & André Pavlov & Adrien Mourot ##
 ##########################24/05/2024#########################
                       ## Global code ##
-            ## A ReadMe file is in the repertory ##
 
 import pygame
 import pygame_menu
