@@ -1,18 +1,24 @@
 ## Created by Sarah Houyoux & André Pavlov & Adrien Mourot ##
 ##########################24/05/2024#########################
                       ## Global code ##
+            ## A ReadMe file is in the repertory ##
 
 import pygame
 import pygame_menu
+from pygame_menu import events
+from pygame_menu import Menu
 from pygame_menu import themes
 import pygame_textinput
 from typing import Tuple, Any
 from tkinter import Tk, filedialog
-import sys
-import subprocess
-import os
+from sys import exit
+from sys import executable
+from subprocess import Popen
+from os import path
+from os import listdir
 import csv
-import random
+from random import shuffle
+from random import choice
 
 global difficulty
 difficulty = 1
@@ -33,7 +39,7 @@ languages = {
                 'Choose language': 'Choose Language',
                 'Back to Main Menu': 'Back to Main Menu',
                 'Quit': 'Quit',
-                'Welcome to main menu!': 'Bienvenue sur la plateforme de jeux!',
+                'Welcome to main menu!': 'Welcome to main menu!',
                 'Log in': 'Log In',
                 'Sign up': 'Sign Up',
                 'Email: ': 'Email: ',
@@ -89,7 +95,7 @@ languages = {
                 'Welcome to main menu!': 'Bienvenue sur la plateforme de jeux!',
                 'Log in': 'Se connecter',
                 'Sign up': 'S\'inscrire',
-                'Email': 'Courriel: ',
+                'Email: ': 'Courriel: ',
                 'Password: ': 'Mot de passe: ',
                 'Difficulty: ': 'Difficulté:',
                 'Delete User': 'Supprimer le compte',
@@ -142,7 +148,7 @@ languages = {
                 'Welcome to main menu!': 'Oyun platformuna hoş geldiniz!',
                 'Log in': 'Giriş',
                 'Sign up': 'Kaydol',
-                'Email': 'E-posta: ',
+                'Email: ': 'E-posta: ',
                 'Password: ': 'Şifre: ',
                 'Difficulty: ': 'Zorluk:',
                 'Delete User': 'Kullanıcı Sil',
@@ -227,11 +233,12 @@ while run:
                         l = last_line.split(',')
                         return l[0]
 
+    
     ## Main menu after log in##
     #########25/05/2024########
 
     def afterloginmenu():
-        profilemenu = pygame_menu.Menu('Menu', 1280, 720, theme=themes.THEME_SOLARIZED) #theses few lines set up the different things to show on the main menu
+        profilemenu = Menu('Menu', 1280, 720, theme=themes.THEME_SOLARIZED) #theses few lines set up the different things to show on the main menu
         profilemenu.add.button(t('Profile'), profile_menu)
         profilemenu.add.button(t('How to play'), htp_menu)
         profilemenu.add.button(t('Guess Who Game'), guess_who_menu)
@@ -242,6 +249,7 @@ while run:
         profilemenu.add.button(t('Quit'), pygame_menu.events.EXIT) #type: ignore
         profilemenu.mainloop(screen)
     
+    
     ## Profile Menu ##
     ### 28/05/2024 ###
 
@@ -250,9 +258,9 @@ while run:
         uploaded_image = None
         image_dir = "D:/Aero 1/2nd semester/AnGp121 - Programming project/Student_File-2024/charIcons/"
         WHITE   = (255, 255, 255)
-        files = os.listdir(image_dir)
+        files = listdir(image_dir)
         image_files = [f for f in files if f.endswith(".png")]
-        images = [pygame.image.load(os.path.join(image_dir, f)) for f in image_files]
+        images = [pygame.image.load(path.join(image_dir, f)) for f in image_files]
         image_names = [f.replace(".png", "") for f in image_files]
         current_images = {i: {"image": images[i], "name": image_names[i]} for i in range(len(images))}
 
@@ -275,18 +283,15 @@ while run:
                 writer.writerow([nickname, image_path])
 
         def update_username_file(email, nickname):
-            # Read the current data from the file
             with open('File_username.csv', mode='r', newline='') as file:
                 reader = csv.reader(file)
                 rows = list(reader)
 
-            # Find the row with the given email and update the nickname
             for row in rows:
                 if row[0] == email:
                     row[2] = nickname
                     break
 
-            # Write the updated data back to the file
             with open('File_username.csv', mode='w', newline='') as file:
                 writer = csv.writer(file)
                 writer.writerows(rows)
@@ -303,7 +308,7 @@ while run:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    sys.exit()
+                    exit()
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     for pos, img_rect in enumerate(image_rects): #type: ignore
                         if img_rect.collidepoint(event.pos):
@@ -343,7 +348,7 @@ while run:
                         uploaded_image = uploaded_image_path = upload_image()
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
                     nickname = textinput.value
-                    image_path = uploaded_image_path if uploaded_image else os.path.join(image_dir, current_images[0]["name"] + ".png")
+                    image_path = uploaded_image_path if uploaded_image else path.join(image_dir, current_images[0]["name"] + ".png")
                     save_profile(nickname, image_path)
                     update_username_file(logged_in_email, nickname)
 
@@ -377,7 +382,7 @@ while run:
             for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         pygame.quit()
-                        sys.exit()
+                        exit()
                     elif event.type == pygame.MOUSEBUTTONDOWN:
                         for pos, img_rect in enumerate(image_rects): #type: ignore
                             if img_rect.collidepoint(event.pos):
@@ -444,7 +449,6 @@ while run:
 
         while running_game:
             pygame.init()
-
             screen_width = 1280
             screen_height = 720
             screen = pygame.display.set_mode((screen_width, screen_height))
@@ -452,18 +456,18 @@ while run:
             screen.fill((239, 231, 211))
 
 
-            image_files = [f for f in os.listdir(image_dir) if os.path.isfile(os.path.join(image_dir, f))] #these lines allow to pick up somes images in the charIcons repertory
-            random.shuffle(image_files)
+            image_files = [f for f in listdir(image_dir) if path.isfile(path.join(image_dir, f))] #these lines allow to pick up somes images in the charIcons repertory
+            shuffle(image_files)
             selected_images = image_files[:29]
             first_32_images = selected_images[:14]
             second_32_images = selected_images[14:29]
 
 
-            loaded_images_first_set = [pygame.image.load(os.path.join(image_dir, img)) for img in first_32_images]
-            loaded_images_second_set = [pygame.image.load(os.path.join(image_dir, img)) for img in second_32_images]
+            loaded_images_first_set = [pygame.image.load(path.join(image_dir, img)) for img in first_32_images]
+            loaded_images_second_set = [pygame.image.load(path.join(image_dir, img)) for img in second_32_images]
 
-            random_image_first_set = random.choice(loaded_images_first_set) #these two lines allow to choose a card for both players
-            random_image_second_set = random.choice(loaded_images_second_set)
+            random_image_first_set = choice(loaded_images_first_set) #these two lines allow to choose a card for both players
+            random_image_second_set = choice(loaded_images_second_set)
             
             margin = 10
                      
@@ -620,7 +624,6 @@ while run:
 
                 return_button.show()
             pygame.display.update()
-        
     
     
     ## Score Board ##
@@ -642,14 +645,13 @@ while run:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    sys.exit()
+                    exit()
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     if return_button.click(event):
                         pygame.display.set_caption(t('IPSA GAME PLATFORM')) 
                         running_sb=False
 
             screen.fill((239, 231, 211))
-
 
             file = open('File_username.csv', 'r')
             lines = file.readlines()
@@ -702,13 +704,13 @@ while run:
     def mg_menu():
         pygame.display.set_caption(t('More Games Menu'))
         def start_snake_game():
-            subprocess.Popen([sys.executable, r'D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Snake\snake.py'])
+            Popen([executable, r'D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Snake\snake.py'])
 
         def start_table_tennis_game():
-            subprocess.Popen([sys.executable, r'D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\TableTennis\Pong7_Score.py'])
+            Popen([executable, r'D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\TableTennis\Pong7_Score.py'])
 
         def start_starfield_game():
-            subprocess.Popen([sys.executable, r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Starfield\Starfield.py"])
+            Popen([executable, r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Starfield\Starfield.py"])
 
         snake_image = pygame.image.load(r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\Snake\Graphics\apple.png")
         table_tennis_image = pygame.image.load(r"D:\Aero 1\2nd semester\AnGp121 - Programming project\Student_File-2024\TableTennis\Ball.png")
@@ -729,7 +731,7 @@ while run:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    sys.exit()
+                    exit()
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     if snake_rect.collidepoint(event.pos):
                         start_snake_game()
@@ -796,7 +798,7 @@ while run:
         running_settings=True
 
         while running_settings:
-            settings_menu = pygame_menu.Menu(t('Settings'), 1280, 720, theme=themes.THEME_SOLARIZED)
+            settings_menu = Menu(t('Settings'), 1280, 720, theme=themes.THEME_SOLARIZED)
             settings_menu.add.selector(t('Difficulty: '), [('Easy', 1), ('Hard', 2)], onchange=set_difficulty)
             settings_menu.add.selector(t('Choose language'), [('English', 'en'), ('Français', 'fr'), ('Türkçe', 'tr')], onchange=set_language)
             settings_menu.add.button(t('Delete User'), deleteuser_button)
@@ -805,10 +807,11 @@ while run:
 
     
     ## Main menu parameters ##
+    ####### 24/05/2024 #######
 
     def main_menu():
-            ## Main Menu - log in & Sign up##
-
+        
+        ## Main Menu - log in & Sign up ##
         def signup_button(): #here is some functions, this one define the actions when we click on the button to sign up
             c1 = courriel1.get_value()
             m1 = mdp1.get_value()
@@ -827,7 +830,7 @@ while run:
                     pygame.time.delay(1000)
                     flag=1
             if flag==0: #if not, it returns that the user is now registered
-                if len(m1)>6:
+                if len(m1)>=6:
                     file=open("File_username.csv", "a")
                     file.write(f"{c1},{m1},no nickname,0\n")
                     colour1 = (200, 0, 0)
@@ -873,13 +876,13 @@ while run:
                 pygame.time.delay(1000)
                 flag=1 
 
-        mainmenu = pygame_menu.Menu(t('Welcome to main menu!'), 1280, 720, theme=themes.THEME_SOLARIZED) #theses few lines set up the different things to show on the main menu
-        courriel1 = mainmenu.add.text_input(t('Email: '), default='Email', maxchar=30)
-        mdp1 = mainmenu.add.text_input(t('Password: '), default='Password', maxchar=20)
+        mainmenu = Menu(t('Welcome to main menu!'), 1280, 720, theme=themes.THEME_SOLARIZED) #theses few lines set up the different things to show on the main menu
+        courriel1 = mainmenu.add.text_input(t('Email: '), maxchar=30)
+        mdp1 = mainmenu.add.text_input(t('Password: '), maxchar=20)
         mainmenu.add.button(t('Sign up'), signup_button)
         mainmenu.add.text_input('',maxchar=0)
-        courriel2 = mainmenu.add.text_input(t('Email: '), default='Email', maxchar=30)
-        mdp2 = mainmenu.add.text_input(t('Password: '),default='Password', maxchar=20)
+        courriel2 = mainmenu.add.text_input(t('Email: '), maxchar=30)
+        mdp2 = mainmenu.add.text_input(t('Password: '), maxchar=20)
         mainmenu.add.button(t('Log in'), login_button)
         mainmenu.add.text_input('',maxchar=0)
         mainmenu.add.button(t('Quit'), pygame_menu.events.EXIT) # type: ignore
