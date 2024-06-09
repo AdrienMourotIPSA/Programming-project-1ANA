@@ -2,6 +2,7 @@
 ##########################24/05/2024#########################
                       ## Global code ##
 
+from threading import local
 import pygame
 import pygame_menu
 from pygame_menu import Menu
@@ -29,12 +30,12 @@ languages = {
                 'Profile': 'Profile',
                 'How to play': 'How to Play',
                 'How to Play Menu':'How to play Menu',
-                'Guess Who Game': 'Guess Who Game',
+                'Guess Who Game': 'Guess Who? Game',
                 'Score Board': 'Score Board',
                 'More Games': 'More Games',
                 'More Games Menu': 'More Games Menu',
                 'Settings': 'Settings',
-                'Choose language': 'Choose Language',
+                'Choose language: ': 'Choose Language',
                 'Back to Main Menu': 'Back to Main Menu',
                 'Quit': 'Quit',
                 'Welcome to main menu!': 'Welcome to main menu!',
@@ -75,19 +76,23 @@ languages = {
                 'Choose your character':'Choose your character',
                 'Unable to load image.':'Unable to load image.',
                 'Profile Menu':'Profile Menu',
-                'lost!':'lost!'
+                'lost!':'lost!',
+                'Easy':'Easy',
+                'Hard':'Hard',
+                'here is the Leaderboard!':'here is the Leaderboard!',
+                'Deconnect':'Deconnect'
             },
             'fr': {
                 'main_menu': 'Menu Principal',
                 'Profile': 'Profil',
                 'How to play': 'Comment Jouer',
                 'How to Play Menu':'Menu "Comment Jouer"',
-                'Guess Who Game': 'Jeu Qui est-ce',
+                'Guess Who Game': 'Jeu Qui est-ce ?',
                 'Score Board': 'Tableau des Scores',
                 'More Games': 'Plus de Jeux',
                 'More Games Menu': 'Menu avec plus de Jeux',
                 'Settings': 'Paramètres',
-                'Choose language': 'Choisir la langue',
+                'Choose language: ': 'Choisir la langue',
                 'Back to Main Menu': 'Retour au menu principal',
                 'Quit': 'Quitter',
                 'Welcome to main menu!': 'Bienvenue sur la plateforme de jeux!',
@@ -128,19 +133,23 @@ languages = {
                 'Choose your character':'choisissez votre image',
                 'Unable to load image.':'impossible de charger l\'image',
                 'Profile Menu':'Menu du Profil',
-                'lost!':'perdant!'
+                'lost!':'perdant!',
+                'Easy':'Facile',
+                'Hard':'Difficile',
+                'here is the Leaderboard!':'voici le podium!',
+                'Deconnect':'Déconnecter'
             },
             'tr': {
                 'main_menu': 'Ana Menü',
                 'Profile': 'Profil',
                 'How to play': 'Oyunu Nasıl Oynanır',
                 'How to Play Menu': 'Nasıl Oynanır Menüsü',
-                'Guess Who Game': 'Kimse Söyle',
+                'Guess Who Game': 'Kimse Söyle?',
                 'Score Board': 'Puan Tablosu',
                 'More Games': 'Başka oyunlar',
                 'More Games Menu': 'Çıkış',
                 'Settings': 'Ayarlar',
-                'Choose language': 'Dil Seçin',
+                'Choose language: ': 'Dil Seçin',
                 'Back to Main Menu': 'Ana Menüye Dön',
                 'Quit': 'Çıkış Yap',
                 'Welcome to main menu!': 'Oyun platformuna hoş geldiniz!',
@@ -181,7 +190,11 @@ languages = {
                 'Choose your character':'Karakterinizi seçin',
                 'Unable to load image.':'Resim yüklenemiyor.',
                 'Profile Menu':'Profil Menüsü',
-                'lost!':'kaybetti!'
+                'lost!':'kaybetti!',
+                'Easy':'Kolay',
+                'Hard':'Sert',
+                'here is the Leaderboard!':'İşte Liderlik Tablosu!',
+                'Deconnect':'Bağlantıyı Kes'
             }
         }
 global current_language
@@ -189,10 +202,6 @@ current_language = 'en'
 
 def t(key):
     return languages[current_language][key]
-
-pygame.init() #here, we define the bases characteristics of the window to launch
-screen = pygame.display.set_mode((1280 , 720))
-pygame.display.set_caption(t('IPSA GAME PLATFORM'))
 
 class Button:
     def __init__(self, text, pos, font, bg="black"):
@@ -220,32 +229,40 @@ class Button:
         return False
 
 run =True
+x_length=1280
+y_length=720
 
 while run:
-
+    pygame.init() #here, we define the bases characteristics of the window to launch
+    screen = pygame.display.set_mode((x_length , y_length))
     def profile():
-                with open('profile.csv', 'r') as file:
-                    lines = file.readlines()  # Read all lines
-                    if lines:
-                        last_line = lines[-1]  # Get the last line
-                        l = last_line.split(',')
-                        return l[0]
+        with open('profile.csv', 'r') as file:
+            lines = file.readlines()  # Read all lines
+            if lines:
+                last_line = lines[-1]  # Get the last line
+                l = last_line.split(',')
+                return l[0]
 
+    def deconnect_button():
+        run_als=False
+        main_menu()
     
     ## Main menu after log in##
     #########25/05/2024########
 
     def afterloginmenu():
-        profilemenu = Menu('Menu', 1280, 720, theme=themes.THEME_SOLARIZED) #theses few lines set up the different things to show on the main menu
-        profilemenu.add.button(t('Profile'), profile_menu)
-        profilemenu.add.button(t('How to play'), htp_menu)
-        profilemenu.add.button(t('Guess Who Game'), guess_who_menu)
-        profilemenu.add.button(t('Score Board'), sb_menu)
-        profilemenu.add.button(t('More Games'), mg_menu)
-        profilemenu.add.button(t('Settings'), settings_menu)
-        profilemenu.add.text_input('',maxchar=0)
-        profilemenu.add.button(t('Quit'), pygame_menu.events.EXIT) #type: ignore
-        profilemenu.mainloop(screen)
+        run_als=True
+        while run_als:
+            profilemenu = Menu('Menu', x_length, y_length, theme=themes.THEME_SOLARIZED) #theses few lines set up the different things to show on the main menu
+            profilemenu.add.button(t('Profile'), profile_menu)
+            profilemenu.add.button(t('How to play'), htp_menu)
+            profilemenu.add.button(t('Guess Who Game'), guess_who_menu)
+            profilemenu.add.button(t('Score Board'), sb_menu)
+            profilemenu.add.button(t('More Games'), mg_menu)
+            profilemenu.add.button(t('Settings'), settings_menu)
+            profilemenu.add.button(t('Deconnect'), deconnect_button)
+            profilemenu.add.button(t('Quit'), pygame_menu.events.EXIT) #type: ignore
+            profilemenu.mainloop(screen)
     
     
     ## Profile Menu ##
@@ -432,42 +449,64 @@ while run:
         
         def read_current_player():
             with open(Profile_name, 'r') as profile_file:
-                return profile_file.readline().strip()
-
-        def update_player_score(username, score_change):
+                lines = profile_file.readlines()
+                if len(lines) > 1:
+                    second_line = lines[1].strip()
+                    first_element = second_line.split(',')[0]
+                    return first_element
+                else:
+                    return None
+            
+        def update_player_score(nickname, score_change):
             with open(File_username_path, 'r') as infile:
                 reader = list(csv.reader(infile))
             
             with open(File_username_path, 'w', newline='') as outfile:
                 writer = csv.writer(outfile)
                 for row in reader:
-                    if row[3] == username:
-                        row[2] = str(int(row[2]) + score_change)
+                    if row[2] == nickname:  # assuming nickname is in the 3rd element (index 2)
+                        row[3] = str(int(row[3]) + score_change)  # assuming score is in the 4th element (index 3)
                     writer.writerow(row)
 
         while running_game:
             pygame.init()
-            screen_width = 1280
-            screen_height = 720
+            screen_width = x_length
+            screen_height = y_length
             screen = pygame.display.set_mode((screen_width, screen_height))
             pygame.display.set_caption(t("Guess Who Game"))
             screen.fill((239, 231, 211))
 
 
             image_files = [f for f in listdir(image_dir) if path.isfile(path.join(image_dir, f))] #these lines allow to pick up somes images in the charIcons repertory
-            shuffle(image_files)
-            selected_images = image_files[:29]
-            first_32_images = selected_images[:14]
-            second_32_images = selected_images[14:29]
+            
+            def image_selection():
+                global loaded_images_first_set, loaded_images_second_set, random_image_first_set, random_image_second_set   
+                if difficulty==1:
+                    shuffle(image_files)
+                    selected_images = image_files[:22]
+                    first_32_images = selected_images[:11]
+                    second_32_images = selected_images[11:22]
 
+                    loaded_images_first_set = [pygame.image.load(path.join(image_dir, img)) for img in first_32_images]
+                    loaded_images_second_set = [pygame.image.load(path.join(image_dir, img)) for img in second_32_images]
 
-            loaded_images_first_set = [pygame.image.load(path.join(image_dir, img)) for img in first_32_images]
-            loaded_images_second_set = [pygame.image.load(path.join(image_dir, img)) for img in second_32_images]
+                    random_image_first_set = choice(loaded_images_first_set) #these two lines allow to choose a card for both players
+                    random_image_second_set = choice(loaded_images_second_set)
+                elif difficulty==2:
+                    shuffle(image_files)
+                    selected_images = image_files[:30]
+                    first_32_images = selected_images[:15]
+                    second_32_images = selected_images[15:30]
 
-            random_image_first_set = choice(loaded_images_first_set) #these two lines allow to choose a card for both players
-            random_image_second_set = choice(loaded_images_second_set)
+                    loaded_images_first_set = [pygame.image.load(path.join(image_dir, img)) for img in first_32_images]
+                    loaded_images_second_set = [pygame.image.load(path.join(image_dir, img)) for img in second_32_images]
+
+                    random_image_first_set = choice(loaded_images_first_set) #these two lines allow to choose a card for both players
+                    random_image_second_set = choice(loaded_images_second_set)
+                    
             
             margin = 10
+            image_selection()
                      
             def calculate_positions(loaded_images):
                 positions = []
@@ -520,12 +559,12 @@ while run:
             current_player = 1
             current_player_username = read_current_player()
 
-            running = True
+            running_choice = True
             return_button = Button(t("Return"), (screen.get_width() - 100, screen.get_height() - 400), font=36)
-            while running:
+            while running_choice:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
-                        running = False
+                        running_choice = False
                     elif event.type == pygame.MOUSEBUTTONDOWN:
                         mouse_pos = pygame.mouse.get_pos()
 
@@ -566,10 +605,10 @@ while run:
                                         win_text = font.render(f"{t('Player')} {current_player} {t('wins!')}", True, (0, 0, 0))
                                         screen.blit(win_text, win_text.get_rect(center=win_frame_rect.center))
                                         pygame.display.flip()
-                                        pygame.time.wait(3000)
+                                        pygame.time.wait(2000)
                                         update_player_score(current_player_username, 1)
                                         correct_guess = True
-                                        running = False
+                                        running_choice = False
                                     break
 
                             if not correct_guess:
@@ -579,9 +618,9 @@ while run:
                                 lose_text = font.render(f"{t('Player')} {current_player} {t('lost!')}", True, (0, 0, 0))
                                 screen.blit(lose_text, lose_text.get_rect(center=lose_frame_rect.center))
                                 pygame.display.flip()
-                                pygame.time.wait(3000)
+                                pygame.time.wait(2000)
                                 update_player_score(current_player_username, -1)
-                                running = False
+                                running_choice = False
 
                             guess_mode = False
 
@@ -669,7 +708,7 @@ while run:
             profile_name=profile()
 
             font = pygame.font.Font(None, 36)
-            hello=font.render(f"Hello {profile_name}, here is the Leaderboard!", True, (100, 100, 200))
+            hello=font.render(f"{t('Hello')} {profile_name}, {t('here is the Leaderboard!')}", True, (100, 100, 200))
             screen.blit(hello, (140,100 ))
             first=font.render("#1", True, (100, 0, 0))
             second=font.render("#2", True, (100, 0, 0))
@@ -796,9 +835,9 @@ while run:
         running_settings=True
 
         while running_settings:
-            settings_menu = Menu(t('Settings'), 1280, 720, theme=themes.THEME_SOLARIZED)
-            settings_menu.add.selector(t('Difficulty: '), [('Easy', 1), ('Hard', 2)], onchange=set_difficulty)
-            settings_menu.add.selector(t('Choose language'), [('English', 'en'), ('Français', 'fr'), ('Türkçe', 'tr')], onchange=set_language)
+            settings_menu = Menu(t('Settings'), x_length, y_length, theme=themes.THEME_SOLARIZED)
+            settings_menu.add.selector(t('Difficulty: '), [(t('Easy'), 1), (t('Hard'), 2)], onchange=set_difficulty)
+            settings_menu.add.selector(t('Choose language: '), [('English', 'en'), ('Français', 'fr'), ('Türkçe', 'tr')], onchange=set_language)
             settings_menu.add.button(t('Delete User'), deleteuser_button)
             settings_menu.add.button(t('Back to Main Menu'), return_button)
             settings_menu.mainloop(screen)
@@ -874,7 +913,8 @@ while run:
                 pygame.time.delay(1000)
                 flag=1 
 
-        mainmenu = Menu(t('Welcome to main menu!'), 1280, 720, theme=themes.THEME_SOLARIZED) #theses few lines set up the different things to show on the main menu
+        pygame.display.set_caption(t('IPSA GAME PLATFORM'))
+        mainmenu = Menu(t('Welcome to main menu!'), x_length, y_length, theme=themes.THEME_SOLARIZED) #theses few lines set up the different things to show on the main menu
         courriel1 = mainmenu.add.text_input(t('Email: '), maxchar=30)
         mdp1 = mainmenu.add.text_input(t('Password: '), maxchar=20)
         mainmenu.add.button(t('Sign up'), signup_button)
