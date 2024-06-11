@@ -66,7 +66,7 @@ languages = {
                 'It\'s a two-player board game where players each':'It\'s a two-player board game where players each',
                 'guess the identity of the others chosen character.':'guess the identity of the others chosen character.',
                 'Player ask each other yes_no questions.':'Player ask each other closed questions.',
-                'For instance , hair color of the chosen character':'For instance , hair color of the chosen character',
+                'For instance , hair color of the chosen character':'For instance, hair color of the chosen character',
                 'will help to evaluate many characters to':'will help to evaluate many characters to',
                 'make correct guest.':'make correct guest.',
                 'By clicking the image':'By clicking the image',
@@ -494,9 +494,9 @@ while run:
                     random_image_second_set = choice(loaded_images_second_set)
                 elif difficulty==2:
                     shuffle(image_files)
-                    selected_images = image_files[:30]
-                    first_32_images = selected_images[:15]
-                    second_32_images = selected_images[15:30]
+                    selected_images = image_files[:36]
+                    first_32_images = selected_images[:18]
+                    second_32_images = selected_images[18:36]
 
                     loaded_images_first_set = [pygame.image.load(path.join(image_dir, img)) for img in first_32_images]
                     loaded_images_second_set = [pygame.image.load(path.join(image_dir, img)) for img in second_32_images]
@@ -523,14 +523,19 @@ while run:
                         positions.append((x_pos, y_offset))
                     return positions
                 elif difficulty==2:
-                    x_offset = (screen_width - sum([img.get_width() + margin for img in loaded_images[:8]]) + margin) // 2
-                    for i in range(8):
+                    x_offset = (screen_width - sum([img.get_width() + margin for img in loaded_images[:7]]) + margin) // 2
+                    for i in range(7):
                         x_pos = x_offset + i * (loaded_images[i].get_width() + margin)
                         positions.append((x_pos, y_offset))
                     y_offset += loaded_images[0].get_height() + margin
-                    x_offset = (screen_width - sum([img.get_width() + margin for img in loaded_images[8:15]]) + margin) // 2
-                    for i in range(7):
-                        x_pos = x_offset + i * (loaded_images[8 + i].get_width() + margin)
+                    x_offset = (screen_width - sum([img.get_width() + margin for img in loaded_images[7:13]]) + margin) // 2
+                    for i in range(6):
+                        x_pos = x_offset + i * (loaded_images[7 + i].get_width() + margin)
+                        positions.append((x_pos, y_offset))
+                    x_offset = (screen_width - sum([img.get_width() + margin for img in loaded_images[13:18]]) + margin) // 2
+                    y_offset += loaded_images[0].get_height() + margin
+                    for i in range(5):
+                        x_pos = x_offset + i * (loaded_images[6 + i].get_width() + margin)
                         positions.append((x_pos, y_offset))
                     return positions
 
@@ -551,7 +556,7 @@ while run:
             switch_frame_button_rect = pygame.Rect(screen_width - 200, screen_height - 100, button_width, button_height)
 
 
-            button_text_color = (0, 0, 0)
+            button_text_color = (255, 255, 255)
             delete_mode = False
             guess_mode = False
             first_frame = True
@@ -606,7 +611,10 @@ while run:
                                         screen.blit(win_text, win_text.get_rect(center=win_frame_rect.center))
                                         pygame.display.flip()
                                         pygame.time.wait(2000)
-                                        update_player_score(current_player_username, 1)
+                                        if current_player==1:
+                                            update_player_score(current_player_username, 1)
+                                        elif current_player==2:
+                                            update_player_score(current_player_username, -1)
                                         correct_guess = True
                                         running_choice = False
                                     break
